@@ -1,5 +1,5 @@
 from django.db import models
-
+from django import forms
 # Create your models here.
 
 class Marca(models.Model):
@@ -26,5 +26,15 @@ class Ropa(models.Model):
 
 
     """docstring for Ropa."""
+    def __init__(self):
+        return self.nombre
+
+class Usuario(models.Model):
+    nombre = models.CharField(max_length = 20)
+    contrasenya = models.CharField(max_length = 20)
+    carro = models.ManyToManyField('appIndiTDE.Ropa')
+    lista_deseo = models.ManyToManyField('appIndiTDE.Ropa', related_name = 'lista_deseo')
+    tarjeta_credito = models.IntegerField()
+
     def __init__(self):
         return self.nombre
