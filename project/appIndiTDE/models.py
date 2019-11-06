@@ -9,7 +9,7 @@ class Marca(models.Model):
     logo = models.ImageField()
 
 
-    def __init__(self):
+    def __str__(self):
         return self.nombre
 
 
@@ -26,7 +26,7 @@ class Ropa(models.Model):
 
 
     """docstring for Ropa."""
-    def __init__(self):
+    def __str__(self):
         return self.nombre
 
 class Usuario(models.Model):
@@ -36,5 +36,5 @@ class Usuario(models.Model):
     lista_deseo = models.ManyToManyField('appIndiTDE.Ropa', related_name = 'lista_deseo')
     tarjeta_credito = models.IntegerField()
 
-    def __init__(self):
+    def __str__(self):
         return self.nombre
