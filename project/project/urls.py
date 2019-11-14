@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name = 'index'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
+    path('clothe/<str:brand_name>', views.brand, name ='brand'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

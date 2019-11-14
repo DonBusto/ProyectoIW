@@ -6,9 +6,7 @@ from .models import Usuario, Ropa, Marca
 
 def index(request):
     a = list(get_all_clothes())
-    context = {
-        'my_ropa': get_biggest_discount(a)
-    }
+    context = {'my_ropa': get_biggest_discount(a), 'marcas': get_all_brands(a)}
     return render(request, 'inditde/index.html', context)
 
 def clothe(request, id_clothe):
@@ -17,6 +15,11 @@ def clothe(request, id_clothe):
     #Ad un get element by id y pasale desde aqui directamente el objeto ropa
     return render(request, 'inditde/single-product.html', context)
 
+def brand(request, brand_name):
+    brand = Marca.objects.get(nombre = brand_name)
+    ropa = get_by_brand(list(get_all_clothes()), brand)
+    context={'my_ropa': ropa, 'marca':brand, 'marcas': get_all_brands(list(get_all_clothes()))}
+    return render(request, 'inditde/single-blog.html', context)
 
 def get_biggest_discount(ropas):
     n = len(ropas)
@@ -52,8 +55,8 @@ def get_all_categories(ropas):
 def get_all_brands(ropas):
     my_brands = []
     for i in ropas:
-        if ropas[i].marca not in my_brands:
-            my_categorias.append(ropas[i].marca)
+        if i.marca not in my_brands:
+            my_brands.append(i.marca)
     return my_brands
 
 
@@ -68,8 +71,8 @@ def get_by_genre(ropas, genero):
 def get_by_brand(ropas, marca):
     my_ropa = []
     for i in ropas:
-        if (ropas[i].marca == marca):
-            my_ropa.append(ropas[i])
+        if (i.marca.nombre == marca.nombre):
+            my_ropa.append(i)
     return my_ropa
 
 
