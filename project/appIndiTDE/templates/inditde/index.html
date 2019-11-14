@@ -2,6 +2,68 @@
 
 {% extends "inditde/base.html" %}
 {% load static %}
+
+{% block head%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $("#unisex").click(function(){
+            if($(this).hasClass('active')) {
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").hide();
+                $("#article_unisex").show();
+            } else {
+                $("#article_unisex").hide();
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").hide();
+            }
+        });
+        $("#men").click(function(){
+            if($(this).hasClass('active')) {
+                $("#article_all").hide();
+                $("#article_men").show();
+                $("#article_women").hide();
+                $("#article_unisex").hide();
+            } else {
+                $("#article_unisex").hide();
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").hide();
+            }
+        });
+        $("#women").click(function(){
+            if($(this).hasClass('active')) {
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").show();
+                $("#article_unisex").hide();
+            } else {
+                $("#article_unisex").hide();
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").hide();
+            }
+        });
+        $("#all").click(function(){
+            if($(this).hasClass('active')) {
+                $("#article_all").show();
+                $("#article_men").hide();
+                $("#article_women").hide();
+                $("#article_unisex").hide();
+            } else {
+                $("#article_unisex").hide();
+                $("#article_all").hide();
+                $("#article_men").hide();
+                $("#article_women").hide();
+            }
+        });
+        });
+    </script>
+{% endblock%}
+
+
 {% block content %}
 
 
@@ -73,10 +135,10 @@
                     <div class="col-lg-4">
                         <div class="arrival_filter_item filters">
                             <ul>
-                                <li id="all" class="active controls" data-toggle= "">all</li>
-                                <li id="men" class="controls men" data-toggle=".">men</li>
-                                <li id="women" class="controls women" data-toggle=".article_women">women</li>
-                                <li id="unisex" class="controls unisex" data-toggle=".article_unisex">unisex</li>
+                                <li id="all" class="controls active" data-toggle= "" >all</li>
+                                <li id="men" class="controls" data-toggle=".">men</li>
+                                <li id="women" class="controls" data-toggle=".article_women" >women</li>
+                                <li id="unisex" class="controls" data-toggle=".article_unisex" >unisex</li>
                             </ul>
                         </div>
                     </div>
@@ -87,9 +149,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                     
-                        <div id="article_men" class="new_arrival_iner filter-container">
+                        <div id="article_men" class="new_arrival_iner filter-container" style="display:none">
                             {% for r in my_ropa|slice:":6" %}
                                 {% if r.nombre != NULL  %}
+                                {% ifequal r.genero "masculino"%}
                                     
                                     <div class="single_arrivel_item weidth_1 mix shoes">
                                         <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
@@ -110,24 +173,92 @@
                                             <h4>Antes {{r.pvp}}€</h4> 
                                             <h5>Ahora {{r.pfinal}}€</h5>
                                             <div class="social_icon">
-                                                <!-- Todavia no vamos a implementar la funcion del carro
-                                                <a href="#"><i class="ti-heart"></i></a>
-                                                <a href="#"><i class="ti-bag"></i></a>
-                                                -->
+                    
                                             </div>
                                         </div>
                                     </div>
-                                
+                                {% endifequal %}
                                 {% endif %}
                             {% endfor %}
                         </div>
+
+                        <div id="article_women" class="new_arrival_iner filter-container" style="display:none">
+                            {% for r in my_ropa|slice:":6" %}
+                                {% if r.nombre != NULL  %}
+                                {% ifequal r.genero "femenino"%}
+                                    
+                                    <div class="single_arrivel_item weidth_1 mix shoes">
+                                        <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
+                                        <div class="hover_text">
+                                            <p>{{r.marca}} </p>
+                                            
+                                            <a href="single-product.html"><h3>{{r.nombre}}</h3></a>
+                                            
+                                            <h4>Antes {{r.pvp}}€</h4> 
+                                            <h5>Ahora {{r.pfinal}}€</h5>
+                                            <div class="social_icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endifequal %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div id="article_unisex" class="new_arrival_iner filter-container" style="display:none">
+                            {% for r in my_ropa|slice:":6" %}
+                                {% if r.nombre != NULL  %}
+                                {% ifequal r.genero "unisex"%}
+                                    
+                                    <div class="single_arrivel_item weidth_1 mix shoes">
+                                        <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
+                                        <div class="hover_text">
+                                            <p>{{r.marca}} </p>
+                                            
+                                            <a href="single-product.html"><h3>{{r.nombre}}</h3></a>
+                                            
+                                            <h4>Antes {{r.pvp}}€</h4> 
+                                            <h5>Ahora {{r.pfinal}}€</h5>
+                                            <div class="social_icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endifequal %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div id="article_all" class="new_arrival_iner filter-container" >
+                            {% for r in my_ropa|slice:":6" %}
+                                {% if r.nombre != NULL  %}
+                                
+                                    
+                                    <div class="single_arrivel_item weidth_1 mix shoes">
+                                        <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
+                                        <div class="hover_text">
+                                            <p>{{r.marca}} </p>
+                                            
+                                            <a href="single-product.html"><h3>{{r.nombre}}</h3></a>
+                                            
+                                            <h4>Antes {{r.pvp}}€</h4> 
+                                            <h5>Ahora {{r.pfinal}}€</h5>
+                                            <div class="social_icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
 
                     </div> 
                 </div>
             </div>
         </section>
     <!-- new arrival part end -->
-    <script>
+   
 
-    </script>
+
+
+
 {% endblock %}
