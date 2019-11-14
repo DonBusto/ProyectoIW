@@ -2,6 +2,9 @@ from django.db import models
 from django import forms
 # Create your models here.
 
+TEME_CHOICES = (('masculino', 'Masculino'), ('femenino', 'FEMENINO'), ('unisex', 'UNISEX'), )
+
+
 class Marca(models.Model):
     id = models.CharField(max_length = 5, primary_key =True)
     nombre = models.CharField(max_length = 20)
@@ -20,14 +23,17 @@ class Ropa(models.Model):
     pvp = models.DecimalField(max_digits = 7, decimal_places = 2)
     pfinal = models.DecimalField(max_digits = 7, decimal_places = 2, default = pvp)
     categoria = models.CharField(max_length = 120)
+    genero = models.CharField(max_length = 10, choices = TEME_CHOICES, default = 'unisex')
     desc = models.TextField()
     img = models.ImageField()
     marca = models.ForeignKey('Marca', on_delete = models.CASCADE)
 
 
+
     """docstring for Ropa."""
     def __str__(self):
         return self.nombre
+    
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length = 20)
