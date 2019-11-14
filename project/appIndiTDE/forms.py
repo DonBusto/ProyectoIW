@@ -6,9 +6,7 @@ class RegisterForm(forms.ModelForm):
         model = Usuario
         fields = ('Nombre', 'Contrasenya', 'Tarjeta de credito')
 
-class LogInForm(forms.ModelForm):
+class Sugerencia(forms.ModelForm):
     class Meta:
-        model = Usuario
-        fields = ('Nombre', 'Contrasenya')
-
-        
+        model = Sugerencia
+        fields = ('autor', 'titulo', 'texto')
