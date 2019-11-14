@@ -60,67 +60,74 @@
     </section>
     <!-- upcoming_event part start-->
 
-    <!-- new arrival part here -->
-    <section class="new_arrival section_padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="arrival_tittle">
-                        <h2>top offers</h2>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="arrival_filter_item filters">
-                        <ul>
-                            <li class="active controls" data-filter=".*">all</li>
-                            <li class="controls" data-toggle=".men">men</li>
-                            <li class="controls" data-toggle=".women">women</li>
-                            <li class="controls" data-toggle=".unisex">unisex</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="new_arrival_iner filter-container">
 
-                    {% for r in my_ropa %}
-                        {% if r.nombre != NULL %}
-                            <div class="single_arrivel_item weidth_1 mix shoes">
-                                <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
-                                <div class="hover_text">
-                                    <p>{{r.marca}} </p>
-                                    
-                                    <a href="single-product.html"><h3>{{r.nombre}}</h3></a>
-                                    <!-- Todavia no va a haber comentarios
-                                    <div class="rate_icon">
-                                        <a href="#"> <i class="fas fa-star"></i> </a>
-                                        <a href="#"> <i class="fas fa-star"></i> </a>
-                                        <a href="#"> <i class="fas fa-star"></i> </a>
-                                        <a href="#"> <i class="fas fa-star"></i> </a>
-                                        <a href="#"> <i class="fas fa-star"></i> </a>
-                                    </div>
-                                    -->
-                                    
-                                    <h4>Antes {{r.pvp}}€</h4> 
-                                    <h5>Ahora {{r.pfinal}}€</h5>
-                                    <div class="social_icon">
-                                        <!-- Todavia no vamos a implementar la funcion del carro
-                                        <a href="#"><i class="ti-heart"></i></a>
-                                        <a href="#"><i class="ti-bag"></i></a>
-                                        -->
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    
+    <!-- new arrival part here -->
+        <section class="new_arrival section_padding">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="arrival_tittle">
+                            <h2>top offers</h2>
+                        </div>
                     </div>
-                </div> 
+                    <div class="col-lg-4">
+                        <div class="arrival_filter_item filters">
+                            <ul>
+                                <li id="all" class="active controls" data-toggle= "">all</li>
+                                <li id="men" class="controls men" data-toggle=".">men</li>
+                                <li id="women" class="controls women" data-toggle=".article_women">women</li>
+                                <li id="unisex" class="controls unisex" data-toggle=".article_unisex">unisex</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    
+                        <div id="article_men" class="new_arrival_iner filter-container">
+                            {% for r in my_ropa|slice:":6" %}
+                                {% if r.nombre != NULL  %}
+                                    
+                                    <div class="single_arrivel_item weidth_1 mix shoes">
+                                        <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
+                                        <div class="hover_text">
+                                            <p>{{r.marca}} </p>
+                                            
+                                            <a href="single-product.html"><h3>{{r.nombre}}</h3></a>
+                                            <!-- Todavia no va a haber comentarios
+                                            <div class="rate_icon">
+                                                <a href="#"> <i class="fas fa-star"></i> </a>
+                                                <a href="#"> <i class="fas fa-star"></i> </a>
+                                                <a href="#"> <i class="fas fa-star"></i> </a>
+                                                <a href="#"> <i class="fas fa-star"></i> </a>
+                                                <a href="#"> <i class="fas fa-star"></i> </a>
+                                            </div>
+                                            -->
+                                            
+                                            <h4>Antes {{r.pvp}}€</h4> 
+                                            <h5>Ahora {{r.pfinal}}€</h5>
+                                            <div class="social_icon">
+                                                <!-- Todavia no vamos a implementar la funcion del carro
+                                                <a href="#"><i class="ti-heart"></i></a>
+                                                <a href="#"><i class="ti-bag"></i></a>
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div> 
+                </div>
+            </div>
+        </section>
     <!-- new arrival part end -->
+    <script>
+
+    </script>
 {% endblock %}
