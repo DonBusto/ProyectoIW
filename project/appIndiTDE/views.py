@@ -6,7 +6,17 @@ from .models import Usuario, Ropa, Marca
 
 def index(request):
     a = list(get_all_clothes())
-    context = {'my_ropa': get_biggest_discount(a), 'marcas': get_all_brands(a)}
+    
+    masculino = get_by_genre(a, 'masculino')
+    femenino = get_by_genre(a, 'femenino')
+    unisex = get_by_genre(a, 'unisex')
+    
+    context = {'my_ropa': order_by_disccount(a), 
+               'marcas': get_all_brands(a),
+               'my_ropa_masculino': order_by_disccount(masculino),
+               'my_ropa_femenino': order_by_disccount(femenino),
+               'my_ropa_unisex': order_by_disccount(unisex),
+               }
     return render(request, 'inditde/index.html', context)
 
 def clothe(request, id_clothe):
@@ -21,23 +31,8 @@ def brand(request, brand_name):
     context={'my_ropa': ropa, 'marca':brand, 'marcas': get_all_brands(list(get_all_clothes()))}
     return render(request, 'inditde/single-blog.html', context)
 
-def get_biggest_discount(ropas):
-    n = len(ropas)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if (ropas[j].pvp - ropas[j].pfinal > ropas[j + 1].pvp - ropas[j + 1].pfinal):
-                ropas[j], ropas[j + 1] = ropas[j + 1], ropas[j]
-
-    if (n >= 5):
-        my_ropa = [5]
-        for z in range(0, 5):
-            my_ropa.append(ropas[z])
-    else:
-        my_ropa = [n]
-        for x in range(0, n):
-            my_ropa.append(ropas[x])
-    return my_ropa
-
+def order_by_disccount(ropas):
+    return sorted(ropas, key=lambda x: (x.pvp - x.pfinal), reverse=True)
 
 def get_all_clothes():
     ropas = Ropa.objects.all()
@@ -63,8 +58,8 @@ def get_all_brands(ropas):
 def get_by_genre(ropas, genero):
     my_ropa = []
     for i in ropas:
-        if (ropas[i].genero == genero):
-            my_ropa.append(ropas[i])
+        if (i.genero == genero):
+            my_ropa.append(i)
     return my_ropa
 
 
