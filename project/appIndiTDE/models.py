@@ -33,7 +33,7 @@ class Ropa(models.Model):
     """docstring for Ropa."""
     def __str__(self):
         return self.nombre
-    
+
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length = 20)
@@ -41,6 +41,14 @@ class Usuario(models.Model):
     carro = models.ManyToManyField('appIndiTDE.Ropa')
     lista_deseo = models.ManyToManyField('appIndiTDE.Ropa', related_name = 'lista_deseo')
     tarjeta_credito = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre
+
+class Sugerencia(models.Model):
+    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    titulo = models.CharField(max_length = 30)
+    texto = models.CharField(max_length = 240)
 
     def __str__(self):
         return self.nombre
