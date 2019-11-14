@@ -11,6 +11,11 @@ def index(request):
     }
     return render(request, 'inditde/index.html', context)
 
+def clothe(request):
+    
+    context = {'id': 2}
+    return render(request, 'inditde/single-product.html', context)
+
 
 def get_biggest_discount(ropas):
     n = len(ropas)
