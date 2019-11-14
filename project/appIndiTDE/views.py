@@ -11,7 +11,7 @@ def index(request):
     }
     return render(request, 'inditde/index.html', context)
 
-def clothe(request, id):
+def clothe(request, id_clothe):
     
     context = {'id': id}
     #Ad un get element by id y pasale desde aqui directamente el objeto ropa
