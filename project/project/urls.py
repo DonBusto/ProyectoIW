@@ -28,7 +28,7 @@ urlpatterns = [
     path('contact/', views.contact, name = 'contact'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
     path('brand/<str:brand_name>', views.brand, name ='brand'),
-    path('shop/', FilterView.as_view(filterset_class=RopaFilter, template_name='inditde/category.html'), name ='category'),
+    path('shop/', views.category, name ='category'),
     
 ]
 urlpatterns += staticfiles_urlpatterns()
