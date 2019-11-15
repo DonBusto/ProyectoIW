@@ -27,12 +27,7 @@ urlpatterns = [
     path('index/', views.index, name = 'index'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
     path('brand/<str:brand_name>', views.brand, name ='brand'),
-    
-    #path('shop/<str:by_brand_name>', views.category, name ='brand'),
-    path('shop/<str:by_genero>', views.category_genre, name ='category_genre'),
-    #path('shop/<str:by_brand>', views.category_brand, name ='category_genre'),
-    #path('shop/<str:by_brand>', views.category_brand, name ='category_genre'),
-   
+       
     path('shop/', FilterView.as_view(filterset_class=RopaFilter, template_name='inditde/category.html'), name ='category'),
     
 ]
