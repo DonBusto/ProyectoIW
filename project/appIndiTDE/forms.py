@@ -10,3 +10,8 @@ class Sugerencia(forms.ModelForm):
     class Meta:
         model = Sugerencia
         fields = ('autor', 'titulo', 'texto')
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('Nombre', 'Contrasenya')
