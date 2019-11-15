@@ -1,15 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Usuario, Ropa, Marca
 from .filters import RopaFilter
 import logging
 
 
-from django_filters.views import FilterView
-from appIndiTDE.filters import RopaFilter
-
-def category(request):
-    FilterView.as_view(filterset_class=RopaFilter, template_name='inditde/category.html')
-    return redirect(".")
 # Create your views here.
 
 def index(request):
@@ -37,7 +31,6 @@ def clothe(request, id_clothe):
             'marcas': get_all_brands(a),
             'id': id_clothe
         }
-    #Ad un get element by id y pasale desde aqui directamente el objeto ropa
     return render(request, 'inditde/single-product.html', context)
 
 
