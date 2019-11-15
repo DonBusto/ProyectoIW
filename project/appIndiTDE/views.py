@@ -6,12 +6,12 @@ from .models import Usuario, Ropa, Marca
 
 def index(request):
     a = list(get_all_clothes())
-    
+
     masculino = get_by_genre(a, 'masculino')
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
-    
-    context = {'my_ropa': order_by_disccount(a), 
+
+    context = {'my_ropa': order_by_disccount(a),
                'marcas': get_all_brands(a),
                'my_ropa_masculino': order_by_disccount(masculino),
                'my_ropa_femenino': order_by_disccount(femenino),
@@ -32,21 +32,27 @@ def category(request, by_genero):
 
 def clothe(request, id_clothe): 
     a = list(get_all_clothes())   
-    context = {
-                'marcas': get_all_brands(a),
-                'id': id_clothe
+    context = { 
+            'id': id_clothe,
+            'listaRopa' : list(get_all_clothes()),
+            'prenda' : Ropa.objects.get(id=id_clothe),
+            'marcas': get_all_brands(a),
+            'id': id_clothe
         }
     #Ad un get element by id y pasale desde aqui directamente el objeto ropa
     return render(request, 'inditde/single-product.html', context)
 
+
 def brand(request, brand_name):
-    brand = Marca.objects.get(nombre = brand_name)
+    brand = Marca.objects.get(nombre=brand_name)
     ropa = get_by_brand(list(get_all_clothes()), brand)
-    context={'my_ropa': ropa, 'marca':brand, 'marcas': get_all_brands(list(get_all_clothes()))}
+    context = {'my_ropa': ropa, 'marca': brand, 'marcas': get_all_brands(list(get_all_clothes()))}
     return render(request, 'inditde/single-blog.html', context)
+
 
 def order_by_disccount(ropas):
     return sorted(ropas, key=lambda x: (x.pvp - x.pfinal), reverse=True)
+
 
 def get_all_clothes():
     ropas = Ropa.objects.all()
