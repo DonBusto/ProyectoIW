@@ -49,7 +49,10 @@ def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
 
-
+def category(request):
+    filtro = RopaFilter(request.GET, queryset=  get_all_clothes())
+    return render(request, 'inditde/category.html', {'marcas': get_all_brands( get_all_clothes()),'filter':filtro})
+    
 def get_all_categories(ropas):
     my_categorias = []
     for i in ropas:
