@@ -3,6 +3,7 @@ from .models import Usuario, Ropa, Marca
 from .filters import RopaFilter
 import logging
 
+
 # Create your views here.
 
 def index(request):
@@ -20,49 +21,6 @@ def index(request):
                }
     return render(request, 'inditde/index.html', context)
 
-def category_genre(request, by_genero): 
-    a = list(get_all_clothes())
-    filtered = get_by_genre(a, by_genero)
-    
-    if (request.method == 'POST'):
-        logging.warning("nsaknsa")
-        brand = request.POST.get('group_brands')
-        logging.warning("nsaknsa")
-        
-        if(brand != "all_rbtn"):
-            filtered=get_by_brand(a, brand.split("_")[0])
-    
-    context = {
-                'my_ropa': filtered,
-                'marcas': get_all_brands(a),
-
-    }
-    return render(request, 'inditde/category.html', context)
-
-
-def category(request):
-    a = list(get_all_clothes())
-    cat = get_all_categories(a)
-    filtered = RopaFilter(request.GET, queryset=a)
-    
-    if (request.method == 'POST'):
-        brand = request.POST.get('group_brands')
-        
-        if(brand != "all_rbtn"):
-            a=get_by_brand(a, brand.split("_")[0])
-            
-        
-    context = {
-                'my_ropa': a,
-                'marcas': get_all_brands(a),
-                'categorys': cat,
-                'filter': filtered,
-
-    }
-    return render(request, 'inditde/category.html', context)
-
-
-
 
 def clothe(request, id_clothe):
     a = list(get_all_clothes())
@@ -73,7 +31,6 @@ def clothe(request, id_clothe):
             'marcas': get_all_brands(a),
             'id': id_clothe
         }
-    #Ad un get element by id y pasale desde aqui directamente el objeto ropa
     return render(request, 'inditde/single-product.html', context)
 
 
