@@ -23,7 +23,7 @@ def category_genre(request, by_genero):
     a = list(get_all_clothes())
     filtered = get_by_genre(a, by_genero)
     context = {
-                'my_ropa': filtered, 
+                'my_ropa': filtered,
                 'marcas': get_all_brands(a),
 
     }
@@ -32,16 +32,16 @@ def category_genre(request, by_genero):
 def category(request):
     a = list(get_all_clothes())
     context = {
-                'my_ropa': a, 
+                'my_ropa': a,
                 'marcas': get_all_brands(a),
 
     }
     return render(request, 'inditde/category.html', context)
-    
 
-def clothe(request, id_clothe): 
-    a = list(get_all_clothes())   
-    context = { 
+
+def clothe(request, id_clothe):
+    a = list(get_all_clothes())
+    context = {
             'id': id_clothe,
             'listaRopa' : list(get_all_clothes()),
             'prenda' : Ropa.objects.get(id=id_clothe),
@@ -114,3 +114,6 @@ def get_by_priceRange(ropas, min, max):
         if (ropas[i].pfinal >= min and ropas[i].pfinal <= max):
             my_ropa.append(ropas[i])
     return my_ropa
+#def new_suggestion(request):
+#        Sugerencia = Sugerencia()
+#    return render(request, 'poner_url', {'Sugerencia': Sugerencia})
