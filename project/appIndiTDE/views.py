@@ -19,11 +19,20 @@ def index(request):
                }
     return render(request, 'inditde/index.html', context)
 
-def category(request, by_genero):
+def category_genre(request, by_genero):
     a = list(get_all_clothes())
     filtered = get_by_genre(a, by_genero)
     context = {
                 'my_ropa': filtered, 
+                'marcas': get_all_brands(a),
+
+    }
+    return render(request, 'inditde/category.html', context)
+
+def category(request):
+    a = list(get_all_clothes())
+    context = {
+                'my_ropa': a, 
                 'marcas': get_all_brands(a),
 
     }

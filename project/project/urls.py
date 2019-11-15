@@ -27,7 +27,8 @@ urlpatterns = [
     path('brand/<str:brand_name>', views.brand, name ='brand'),
     
     #path('shop/<str:by_brand_name>', views.category, name ='brand'),
-    path('shop/<str:by_genero>', views.category, name ='category_genre'),
+    path('shop/<str:by_genero>', views.category_genre, name ='category_genre'),
+    path('shop/', views.category, name ='category'),
     
 ]
 urlpatterns += staticfiles_urlpatterns()
