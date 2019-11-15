@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario, Ropa, Marca
+from .models import Usuario, Ropa, Marca, Sugerencia
 from .filters import RopaFilter
 import logging
 
@@ -25,13 +25,21 @@ def index(request):
 def clothe(request, id_clothe):
     a = list(get_all_clothes())
     context = {
-            'id': id_clothe,
-            'listaRopa' : list(get_all_clothes()),
-            'prenda' : Ropa.objects.get(id=id_clothe),
-            'marcas': get_all_brands(a),
-            'id': id_clothe
-        }
+        'id': id_clothe,
+        'listaRopa': list(get_all_clothes()),
+        'prenda': Ropa.objects.get(id=id_clothe),
+        'marcas': get_all_brands(a),
+        'id': id_clothe
+    }
     return render(request, 'inditde/single-product.html', context)
+
+
+def contact(request):
+    a = list(get_sugerencias())
+    context = {
+        'listaSugerencias': a
+    }
+    return render(request, 'inditde/contact.html', context)
 
 
 def brand(request, brand_name):
@@ -48,6 +56,11 @@ def order_by_disccount(ropas):
 def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
+
+
+def get_sugerencias():
+    sugerencias = Sugerencia.objects.all()
+    return sugerencias
 
 
 def get_all_categories(ropas):
@@ -98,6 +111,6 @@ def get_by_priceRange(ropas, min, max):
         if (ropas[i].pfinal >= min and ropas[i].pfinal <= max):
             my_ropa.append(ropas[i])
     return my_ropa
-#def new_suggestion(request):
+# def new_suggestion(request):
 #        Sugerencia = Sugerencia()
 #    return render(request, 'poner_url', {'Sugerencia': Sugerencia})
