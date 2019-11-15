@@ -19,6 +19,8 @@ import appIndiTDE.views as views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django_filters.views import FilterView
+from appIndiTDE.filters import RopaFilter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +30,10 @@ urlpatterns = [
     
     #path('shop/<str:by_brand_name>', views.category, name ='brand'),
     path('shop/<str:by_genero>', views.category_genre, name ='category_genre'),
-    path('shop/', views.category, name ='category'),
+    #path('shop/<str:by_brand>', views.category_brand, name ='category_genre'),
+    #path('shop/<str:by_brand>', views.category_brand, name ='category_genre'),
+   
+    path('shop/', FilterView.as_view(filterset_class=RopaFilter, template_name='inditde/category.html'), name ='category'),
     
 ]
 urlpatterns += staticfiles_urlpatterns()

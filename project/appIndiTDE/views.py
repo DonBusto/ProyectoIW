@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario, Ropa, Marca
-
+from .filters import RopaFilter
+import logging
 
 # Create your views here.
 
@@ -19,9 +20,18 @@ def index(request):
                }
     return render(request, 'inditde/index.html', context)
 
-def category_genre(request, by_genero):
+def category_genre(request, by_genero): 
     a = list(get_all_clothes())
     filtered = get_by_genre(a, by_genero)
+    
+    if (request.method == 'POST'):
+        logging.warning("nsaknsa")
+        brand = request.POST.get('group_brands')
+        logging.warning("nsaknsa")
+        
+        if(brand != "all_rbtn"):
+            filtered=get_by_brand(a, brand.split("_")[0])
+    
     context = {
                 'my_ropa': filtered,
                 'marcas': get_all_brands(a),
@@ -29,14 +39,29 @@ def category_genre(request, by_genero):
     }
     return render(request, 'inditde/category.html', context)
 
+
 def category(request):
     a = list(get_all_clothes())
+    cat = get_all_categories(a)
+    filtered = RopaFilter(request.GET, queryset=a)
+    
+    if (request.method == 'POST'):
+        brand = request.POST.get('group_brands')
+        
+        if(brand != "all_rbtn"):
+            a=get_by_brand(a, brand.split("_")[0])
+            
+        
     context = {
                 'my_ropa': a,
                 'marcas': get_all_brands(a),
+                'categorys': cat,
+                'filter': filtered,
 
     }
     return render(request, 'inditde/category.html', context)
+
+
 
 
 def clothe(request, id_clothe):
@@ -71,8 +96,10 @@ def get_all_clothes():
 def get_all_categories(ropas):
     my_categorias = []
     for i in ropas:
-        if ropas[i].categoria not in my_categorias:
-            my_categorias.append(ropas[i].categoria)
+        print(i.nombre)
+        if i.categoria not in my_categorias:
+            print(i.categoria)
+            my_categorias.append(i.categoria)
     return my_categorias
 
 

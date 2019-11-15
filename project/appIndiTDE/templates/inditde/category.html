@@ -19,9 +19,9 @@
                 $("#all").show();
                 $("#show").text("Less Items");
              }
-            });
-        });
+            });});
     </script>
+
 {% endblock%}
 
 
@@ -36,114 +36,77 @@
                 <div class="col-lg-3">
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
-                            <div class="l_w_title">
-                                <h3>Browse Categories</h3>
-                            </div>
-                            <div class="widgets_inner">
+                            <div class="l_w_title"><h3>Browse Categories</h3> </div>
+                            
+                                <form method="get">
                                 <ul class="list">
-                                    <li>
-                                        <a href="#">Fruits and Vegetables</a>
-                                    </li>
-                                    <li class="sub-menu">
-                                        <a href="#Electronics" class=" d-flex justify-content-between">
-                                            Electronics
-                                            <div class="right ti-plus"></div>
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a href="#Electronics">Home Appliances</a>
-                                            </li>
-                                            <li>
-                                                <a href="#Electronics">Smartphones</a>
-                                            </li>
-                                            <li>
-                                                <a href="#Electronics">Kitchen Appliances</a>
-                                            </li>
-                                            <li>
-                                                <a href="#Electronics">Computer Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="#Electronics">Meat Alternatives</a>
-                                            </li>
-                                            <li>
-                                                <a href="#Electronics">Appliances</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cooking</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Beverages</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Home and Cleaning</a>
-                                    </li>
+                                    <div class="l_w_title"><h3>Genero</h3></div>
+                                    <div class="widgets_inner">
+                                    <li> </li>
+                                    <li> {{ filter.form.genero}} </li>
+                                    </div><br>
+                                    <div class="l_w_title"><h3>Brands</h3></div>
+                                    <div class="widgets_inner">
+                                    <li> </li>
+                                    
+                                    {% for choice in filter.form.marca %}
+                                    <li> {{ choice.tag }} {{ choice.choice_label }} </li>
+                                    {% endfor %}
+                                    </div>
                                 </ul>
-                            </div>
+
+                                <div class="text-center">
+                                <button type="submit" class="btn_2 ">Search</button>
+                                </div>
+                            </form>
+                                
+                                
                         </aside>
 
                         <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
-                            <div class="l_w_title">
+                            <!--<div class="l_w_title">
                                 <h3>Product filters</h3>
                             </div>
                             <div class="widgets_inner">
-                                <ul class="list">
-                                    <p>Brands</p>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
-                                <ul class="list">
-                                    <p>color</p>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Black</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Black Leather</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Black with red</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Gold</a>
-                                    </li>
-                                    <li>
-                                        <input type="radio" aria-label="Radio button for following text input">
-                                        <a href="#">Spacegrey</a>
-                                    </li>
-                                </ul>
-                            </div>
+                               <form id="search" name="search">
+                                    <ul class="list">
+                                        <p>Brands</p>
+                                        <li>
+                                            <input type="radio" value="all" name="group_brands" id="group_brands" onclick="onlyone(this)">
+                                            <a onclick="document.getElementById('all').checked=true;">All</a>
+                                        </li>
+                                        {% for m in marcas%}
+                                        <li>
+                                            <input type="radio" value="{{m.nombre}}" name="group_brands" id="group_brands" onclick="onlyone(this)">
+                                            <a onclick="document.getElementById('{{m.nombre}}_rbtn').checked=true;">{{m.nombre}}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <ul class="list">
+                                        <p>Categorys</p>
+                                        {% for c in categorys%}
+                                        <li>
+                                            <input type="radio"  id="{{c}}_rbtn">
+                                            <a href="#">{{c}}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    
+                                    <input type="submit" value="Search">
+                                </form>
+                            </div>-->
+                            
+                            
+
                         </aside>
 
                         <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
-                            <div class="l_w_title">
+                            <!--<div class="l_w_title">
                                 <h3>Price Filter</h3>
                             </div>
                             <div class="widgets_inner">
                                 <div class="range_item">
-                                    <!-- <div id="slider-range"></div> -->
+                                    <div id="slider-range"></div>
                                     <input type="text" class="js-range-slider" value="" />
                                     <div class="d-flex align-items-center">
                                         <div class="price_text">
@@ -156,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </aside>
                     </div>
                 </div>
@@ -165,9 +128,9 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu product_bar_item">
-                                    <h2>Womans (12)</h2>
+                                    <h2>Articles:</h2>
                                 </div>
-                                <div class="product_top_bar_iner product_bar_item d-flex">
+                                <!--<div class="product_top_bar_iner product_bar_item d-flex">
                                     <div class="product_bar_single">
                                         <select class="wide">
                                             <option data-display="Default sorting">Default sorting</option>
@@ -183,12 +146,13 @@
                                             <option value="2">Show 30</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 
+                    
 
-                        {% for r in my_ropa|slice:":6"%}
+                        {% for r in filter.qs|slice:":6"%}
                             <div class="col-lg-4 col-sm-6">
                                 <div class="single_category_product">
                                     <div class="single_category_img">
@@ -208,7 +172,7 @@
                             </div> 
                         {% endfor %}
 
-                        {% for r in my_ropa%}
+                        {% for r in filter.qs%}
                             {% if forloop.counter0 >= 6%}
                                 <div class="col-lg-4 col-sm-6" id="all" style="display:none">
                                     <div class="single_category_product">
@@ -232,14 +196,24 @@
                     
                         
                     </div>
+                    
                     <div class="col-lg-12 text-center">
-                            <a id="show" href="#" class="btn_2">More Items</a>
-                        </div>
+                        <button id="show" class="btn_2">More Items</button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
     <!--================End Category Product Area =================-->
+ <script>
 
-
+function onlyOne(checkbox) {
+    var checkboxes = document.getElementsByName('group_brands')
+    checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked = false
+    })
+    document.brands.submit();
+}
+ </script>
 {% endblock %}
