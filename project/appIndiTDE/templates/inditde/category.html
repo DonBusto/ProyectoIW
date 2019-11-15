@@ -10,7 +10,15 @@
     <script>
         $(document).ready(function(){
         $("#show").click(function(){    
-            $('#prueba').append($('#extra_articles').html());
+            //$('#prueba').append($('#extra_articles').html());
+            if( $('#all').is(':visible')) {
+                $("#all").hide();
+                $("#show").text("More Items");
+            
+            } else {
+                $("#all").show();
+                $("#show").text("Less Items");
+             }
             });
         });
     </script>
@@ -180,7 +188,7 @@
                         </div>
 
 
-                        {% for r in my_ropa%}
+                        {% for r in my_ropa|slice:":6"%}
                             <div class="col-lg-4 col-sm-6">
                                 <div class="single_category_product">
                                     <div class="single_category_img">
@@ -199,7 +207,29 @@
                                 </div>
                             </div> 
                         {% endfor %}
-                        
+
+                        {% for r in my_ropa%}
+                            {% if forloop.counter0 >= 6%}
+                                <div class="col-lg-4 col-sm-6" id="all" style="display:none">
+                                    <div class="single_category_product">
+                                        <div class="single_category_img">
+                                            <img src="{{MEDIA_URL}}{{r.img.url}}" alt="">
+                                            <div class="category_social_icon">
+                                                <ul>
+                                                    <li><a href="#"><i class="ti-heart"></i></a></li>
+                                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="category_product_text">
+                                                <a href="single-product.html"><h5>{{r.nombre}}</h5></a>
+                                                <p>{{r.pfinal}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            {% endif %}
+                        {% endfor %}
+                    
                         
                     </div>
                     <div class="col-lg-12 text-center">
@@ -210,26 +240,6 @@
         </div>
     </section>
     <!--================End Category Product Area =================-->
-<script id="extra_articles" type="text/template">
-{% for r in my_ropa%}
-    <div class="col-lg-4 col-sm-6">
-        <div class="single_category_product">
-            <div class="single_category_img">
-                <img src="{{MEDIA_URL}}{{r.img.url}}" alt="">
-                <div class="category_social_icon">
-                    <ul>
-                        <li><a href="#"><i class="ti-heart"></i></a></li>
-                        <li><a href="#"><i class="ti-bag"></i></a></li>
-                    </ul>
-                </div>
-                <div class="category_product_text">
-                    <a href="single-product.html"><h5>{{r.nombre}}</h5></a>
-                    <p>{{r.pfinal}}</p>
-                </div>
-            </div>
-        </div>
-    </div> 
-{% endfor %}
-<script>
+
 
 {% endblock %}
