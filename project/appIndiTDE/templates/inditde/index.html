@@ -97,7 +97,7 @@
                     <div class="single_feature_post_text">
                         <img src="{% static 'img/feature_1.png' %}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">for men</a>
+                            <a href="{% url 'category_genre' 'masculino'%}" class="btn_2">for men</a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <div class="single_feature_post_text">
                         <img src="{% static 'img/feature_2.png' %}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">for women</a>
+                            <a href="{% url 'category_genre' 'femenino'%}" class="btn_2">for women</a>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                     <div class="single_feature_post_text">
                         <img src="{% static 'img/feature_3.png'%}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">unisex</a>
+                            <a href="{% url 'category_genre' 'femenino'%}" class="btn_2">unisex</a>
                         </div>
                     </div>
                 </div>

@@ -19,9 +19,23 @@ def index(request):
                }
     return render(request, 'inditde/index.html', context)
 
-def clothe(request, id_clothe):
+def category(request, by_genero):
+    a = list(get_all_clothes())
+    filtered = get_by_genre(a, by_genero)
+    context = {
+                'my_ropa': filtered, 
+                'marcas': get_all_brands(a),
+
+    }
+    return render(request, 'inditde/category.html', context)
     
-    context = {'id': id}
+
+def clothe(request, id_clothe): 
+    a = list(get_all_clothes())   
+    context = {
+                'marcas': get_all_brands(a),
+                'id': id_clothe
+        }
     #Ad un get element by id y pasale desde aqui directamente el objeto ropa
     return render(request, 'inditde/single-product.html', context)
 

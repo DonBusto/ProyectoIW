@@ -24,7 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name = 'index'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
-    path('clothe/<str:brand_name>', views.brand, name ='brand'),
+    path('brand/<str:brand_name>', views.brand, name ='brand'),
+    
+    #path('shop/<str:by_brand_name>', views.category, name ='brand'),
+    path('shop/<str:by_genero>', views.category, name ='category_genre'),
+    
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
