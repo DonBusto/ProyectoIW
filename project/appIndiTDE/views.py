@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario, Ropa, Marca, Sugerencia
 from .filters import RopaFilter
-from .forms import Sugerencia
+from .forms import fSugerencia
 import logging
 
 
@@ -36,11 +36,11 @@ def clothe(request, id_clothe):
 
 
 def contact(request):
-    #form = Sugerencia()
+    form = fSugerencia()
     a = list(get_sugerencias())
     context = {
         'sugerencias': a,
-     #   'form' : form
+        'form' : form
     }
     return render(request, 'inditde/contact.html', context)
 

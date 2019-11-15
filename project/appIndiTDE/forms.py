@@ -1,17 +1,20 @@
 from django import forms
-from .models import Usuario
+from .models import Usuario, Sugerencia
+
 
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ('Nombre', 'Contrasenya', 'Tarjeta de credito')
+        fields = ('nombre', 'contrasenya', 'tarjeta_credito')
 
-class Sugerencia(forms.ModelForm):
+
+class fSugerencia(forms.ModelForm):
     class Meta:
         model = Sugerencia
         fields = ('autor', 'titulo', 'texto')
 
+
 class LoginForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ('Nombre', 'Contrasenya')
+        fields = ('nombre', 'contrasenya')
