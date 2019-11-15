@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario, Ropa, Marca, Sugerencia
 from .filters import RopaFilter
+from .forms import Sugerencia
 import logging
 
 
@@ -35,9 +36,11 @@ def clothe(request, id_clothe):
 
 
 def contact(request):
+    #form = Sugerencia()
     a = list(get_sugerencias())
     context = {
-        'listaSugerencias': a
+        'sugerencias': a,
+     #   'form' : form
     }
     return render(request, 'inditde/contact.html', context)
 
@@ -57,19 +60,17 @@ def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
 
-<<<<<<< HEAD
+
 
 def get_sugerencias():
     sugerencias = Sugerencia.objects.all()
     return sugerencias
 
 
-=======
 def category(request):
     filtro = RopaFilter(request.GET, queryset=  get_all_clothes())
     return render(request, 'inditde/category.html', {'marcas': get_all_brands( get_all_clothes()),'filter':filtro})
-    
->>>>>>> f89683656a129f0a0112483673aa6e09497a9b5b
+
 def get_all_categories(ropas):
     my_categorias = []
     for i in ropas:
