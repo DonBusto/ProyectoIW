@@ -38,7 +38,6 @@ def clothe(request, id_clothe):
 def contact(request):
     a = list(get_sugerencias())
     if request.method == "POST":
-        print("post")
         form = fSugerencia(request.POST)
         #if form.is_valid():
         post = form.save(commit=False)
@@ -52,7 +51,6 @@ def contact(request):
         post.save()
         return redirect('contact/', context, pk=post.pk)
     else:
-        print("no post")
         form = fSugerencia()
     context = {
         'sugerencias': a,
