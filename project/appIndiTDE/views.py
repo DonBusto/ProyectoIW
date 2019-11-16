@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Usuario, Ropa, Marca, Sugerencia
+from .models import Usuario, Ropa, Marca, Sugerencia, Comentario
 from .filters import RopaFilter
 from .forms import fSugerencia
 import logging
@@ -25,10 +25,13 @@ def index(request):
 
 def clothe(request, id_clothe):
     a = list(get_all_clothes())
+    listaC = list(get_comments_by_clothe(get_all_comments(),Ropa.objects.get(id=id_clothe)))
     context = {
         'id': id_clothe,
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
+        'comentarios' : listaC,
+        'avg' : get_average(listaC),
         'marcas': get_all_brands(a),
         'id': id_clothe
     }
@@ -77,7 +80,9 @@ def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
 
-
+def get_all_comments():
+    comments = Comentario.objects.all()
+    return comments
 
 def get_sugerencias():
     sugerencias = Sugerencia.objects.all()
@@ -124,7 +129,7 @@ def get_by_brand(ropas, marca):
 def get_comments_by_clothe(comentarios, ropa):
     comments = []
     for i in comentarios:
-        if (comentarios.ropa.id == ropa.id):
+        if (i.ropa.id == ropa.id):
             comments.append(i)
     return comments
 
@@ -134,7 +139,7 @@ def get_average(comentarios):
     for i in comentarios:
         suma += (i.valoracion)
         contador += 1
-    avg = suma / contador
+    avg = float(suma / contador)
     return avg
 
 def get_by_type(ropas, tipo):
