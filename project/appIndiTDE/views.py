@@ -36,13 +36,24 @@ def clothe(request, id_clothe):
 
 
 def contact(request):
-    form = fSugerencia()
     a = list(get_sugerencias())
+    if request.method == "POST":
+        form = fSugerencia(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.autor = request.user
+            #post.published_date = timezone.now()
+            post.save()
+            return redirect('contact/', pk=post.pk)
+    else:
+        form = fSugerencia()
     context = {
         'sugerencias': a,
-        'form' : form
+        'form': form
     }
     return render(request, 'inditde/contact.html', context)
+
+
 
 
 def brand(request, brand_name):
