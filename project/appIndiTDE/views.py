@@ -38,19 +38,21 @@ def clothe(request, id_clothe):
 def contact(request):
     a = list(get_sugerencias())
     if request.method == "POST":
+        print("post")
         form = fSugerencia(request.POST)
         #if form.is_valid():
         post = form.save(commit=False)
         post.autor = request.user
+
             #post.published_date = timezone.now()
         context = {
             'sugerencias': a,
             'form': form
         }
         post.save()
-        console.log(post)
         return redirect('contact/', context, pk=post.pk)
     else:
+        print("no post")
         form = fSugerencia()
     context = {
         'sugerencias': a,
