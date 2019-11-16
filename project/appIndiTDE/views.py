@@ -32,6 +32,7 @@ def clothe(request, id_clothe):
         'prenda': Ropa.objects.get(id=id_clothe),
         'comentarios' : listaC,
         'avg' : get_average(listaC),
+        'recuentoVals' : get_ratings_count(listaC),
         'marcas': get_all_brands(a),
         'id': id_clothe
     }
@@ -126,12 +127,7 @@ def get_by_brand(ropas, marca):
             my_ropa.append(i)
     return my_ropa
 
-def get_ratings_by_clothe(comentarios, ropa):
-    comments = []
-    for i in comentarios:
-        if (i.ropa.id == ropa.id):
-            comments.append(i)
-
+def get_ratings_count(comments):
     cinco = 0
     cuatro = 0
     tres = 0
