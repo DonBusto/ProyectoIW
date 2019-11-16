@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5cadff2b-4430-465e-925a-6ff99f51fa41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/contact.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +91,7 @@
       <workItem from="1573750797994" duration="6567000" />
       <workItem from="1573811362875" duration="1495000" />
       <workItem from="1573828539085" duration="7898000" />
-      <workItem from="1573890080804" duration="384000" />
+      <workItem from="1573890080804" duration="1722000" />
     </task>
     <servers />
   </component>
