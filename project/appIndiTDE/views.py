@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Usuario, Ropa, Marca, Sugerencia
 from .filters import RopaFilter
 from .forms import fSugerencia
@@ -39,17 +39,18 @@ def contact(request):
     a = list(get_sugerencias())
     if request.method == "POST":
         form = fSugerencia(request.POST)
-        #if form.is_valid():
-        post = form.save(commit=False)
-        post.autor = request.user
-
-            #post.published_date = timezone.now()
-        context = {
-            'sugerencias': a,
-            'form': form
-        }
-        post.save()
-        return redirect('contact/', context, pk=post.pk)
+        print(form)
+        print(form.errors)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.autor = request.user
+                #post.published_date = timezone.now()
+            context = {
+                'sugerencias': a,
+                'form': form
+            }
+            post.save()
+            return redirect('contact/', context, pk=post.pk)
     else:
         form = fSugerencia()
     context = {
