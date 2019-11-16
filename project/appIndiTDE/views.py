@@ -121,6 +121,13 @@ def get_by_brand(ropas, marca):
             my_ropa.append(i)
     return my_ropa
 
+def get_comments_by_clothe(comentarios, ropa):
+    comments = []
+    for i in comentarios:
+        if (i.ropa.nombre == ropa.nombre):
+            comments.append(i)
+    return comments
+
 
 def get_by_type(ropas, tipo):
     my_ropa = []

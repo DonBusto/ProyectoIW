@@ -52,3 +52,12 @@ class Sugerencia(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Comentario(models.Model):
+    id = models.CharField(max_length = 10, primary_key =True)
+    usuario = models.ForeignKey('Usuario', on_delete = models.CASCADE)
+    ropa = models.ForeignKey('Ropa', on_delete = models.CASCADE)
+    texto = models.CharField(max_length = 240)
+
+    def __str__(self):
+        return self.texto
