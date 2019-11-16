@@ -207,7 +207,7 @@
                         <li>
                             <a href="https://www.google.es/maps/place/Calle+de+Gord%C3%B3niz,+11,+48010+Bilbao,+Vizcaya/@43.2590363,-2.9413628,17z/data=!3m1!4b1!4m5!3m4!1s0xd4e5029970826f5:0xf5df8ca205cd24b7!8m2!3d43.2590324!4d-2.9391741?hl=es">Gordóniz
                                 11</a></li>
-                        <li><a href="tel:+34676892280">Llámanos</a></li>
+                        <li><a href="tel:+34676892280">+34 676 892 280</a></li>
                         <li><span><a href="mailto:proyectojbiw@gmail.com">proyectojbiw@gmail.com</a></span></li>
                     </ul>
                 </div>
@@ -216,37 +216,22 @@
                 <div class="single_footer_part">
                     <h4>Newsletter</h4>
                     <div id="mc_embed_signup">
-                        <form target="_blank"
-                              action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                              method="get" class="subscribe_form relative mail_part">
-                            <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                        <form target="_blank" id="newsletter"
+                              method="post" class="subscribe_form relative mail_part">{% csrf_token %}
+                            <input type="email" name="email" id="newsletter-form-email" placeholder="Correo"
                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = ' Email Address '">
+                                   onblur="this.placeholder = ' Correo '">
                             <button type="submit" name="submit" id="newsletter-submit"
-                                    class="email_icon newsletter-submit button-contactForm">subscribe
+                                    class="email_icon newsletter-submit button-contactForm">Suscríbete
                             </button>
                             <div class="mt-10 info"></div>
                         </form>
                     </div>
-                    <div class="social_icon">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter-alt"></i></a>
-                        <a href="#"><i class="ti-instagram"></i></a>
-                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="copyright_text">
-                    <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                        All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by
-                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
-                </div>
-            </div>
-        </div>
+
     </div>
 </footer>
 <!--::footer_part end::-->

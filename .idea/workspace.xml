@@ -7,6 +7,7 @@
     <list default="true" id="5cadff2b-4430-465e-925a-6ff99f51fa41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/appIndiTDE/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +93,7 @@
       <workItem from="1573811362875" duration="1495000" />
       <workItem from="1573828539085" duration="7898000" />
       <workItem from="1573890080804" duration="20049000" />
-      <workItem from="1573918988075" duration="1934000" />
+      <workItem from="1573918988075" duration="3669000" />
     </task>
     <servers />
   </component>

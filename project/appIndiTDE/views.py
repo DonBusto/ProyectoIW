@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Usuario, Ropa, Marca, Sugerencia, Comentario
+from django.core.mail import send_mail
+from django.conf import settings
 from .filters import RopaFilter
 from .forms import fSugerencia
 import logging
@@ -8,19 +10,39 @@ import logging
 # Create your views here.
 
 def index(request):
-    a = list(get_all_clothes())
+    print(request.POST.get('email'))
+    if request.method == "POST":
+        temp_email = request.POST.get('email')
+        to_email = [settings.EMAIL_HOST_USER, temp_email]
+        if (temp_email != ""):
+            strEmail = "Ahora estás suscrito a nuestra newsletter. Pronto recibirás noticias de nuestros productos."
+            send_mail("Te has suscrito a nuestra newsletter", strEmail, settings.EMAIL_HOST_USER, to_email, fail_silently=False)
 
-    masculino = get_by_genre(a, 'masculino')
-    femenino = get_by_genre(a, 'femenino')
-    unisex = get_by_genre(a, 'unisex')
+        a = list(get_all_clothes())
+        masculino = get_by_genre(a, 'masculino')
+        femenino = get_by_genre(a, 'femenino')
+        unisex = get_by_genre(a, 'unisex')
+        context = {'my_ropa': order_by_disccount(a),
+                   'marcas': get_all_brands(a),
+                   'my_ropa_masculino': order_by_disccount(masculino),
+                   'my_ropa_femenino': order_by_disccount(femenino),
+                   'my_ropa_unisex': order_by_disccount(unisex),
+                   }
+        return render(request, 'inditde/index.html', context)
+    else:
+        a = list(get_all_clothes())
+        masculino = get_by_genre(a, 'masculino')
+        femenino = get_by_genre(a, 'femenino')
+        unisex = get_by_genre(a, 'unisex')
+        context = {'my_ropa': order_by_disccount(a),
+                   'marcas': get_all_brands(a),
+                   'my_ropa_masculino': order_by_disccount(masculino),
+                   'my_ropa_femenino': order_by_disccount(femenino),
+                   'my_ropa_unisex': order_by_disccount(unisex),
+                   }
+        return render(request, 'inditde/index.html', context)
 
-    context = {'my_ropa': order_by_disccount(a),
-               'marcas': get_all_brands(a),
-               'my_ropa_masculino': order_by_disccount(masculino),
-               'my_ropa_femenino': order_by_disccount(femenino),
-               'my_ropa_unisex': order_by_disccount(unisex),
-               }
-    return render(request, 'inditde/index.html', context)
+
 
 
 def clothe(request, id_clothe):
