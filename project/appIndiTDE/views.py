@@ -128,6 +128,14 @@ def get_comments_by_clothe(comentarios, ropa):
             comments.append(i)
     return comments
 
+def get_average(comentarios):
+    suma = 0
+    contador = 0
+    for i in comentarios:
+        suma += (i.valoracion)
+        contador += 1
+    avg = suma / contador
+    return avg
 
 def get_by_type(ropas, tipo):
     my_ropa = []
