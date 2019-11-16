@@ -124,7 +124,7 @@ def get_by_brand(ropas, marca):
 def get_comments_by_clothe(comentarios, ropa):
     comments = []
     for i in comentarios:
-        if (i.ropa.nombre == ropa.nombre):
+        if (comentarios.ropa.id == ropa.id):
             comments.append(i)
     return comments
 
