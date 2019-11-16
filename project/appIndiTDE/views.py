@@ -126,6 +126,31 @@ def get_by_brand(ropas, marca):
             my_ropa.append(i)
     return my_ropa
 
+def get_ratings_by_clothe(comentarios, ropa):
+    comments = []
+    for i in comentarios:
+        if (i.ropa.id == ropa.id):
+            comments.append(i)
+
+    cinco = 0
+    cuatro = 0
+    tres = 0
+    dos = 0
+    uno = 0
+    for i in comments:
+        if(i.valoracion == 5):
+            cinco += 1
+        elif (i.valoracion == 4):
+            cuatro += 1
+        elif (i.valoracion == 3):
+            tres += 1
+        elif (i.valoracion == 2):
+            dos += 1
+        else:
+            uno += 1
+    vals = [cinco,cuatro,tres,dos,uno]
+    return vals
+
 def get_comments_by_clothe(comentarios, ropa):
     comments = []
     for i in comentarios:
