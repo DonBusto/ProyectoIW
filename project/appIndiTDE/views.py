@@ -39,12 +39,17 @@ def contact(request):
     a = list(get_sugerencias())
     if request.method == "POST":
         form = fSugerencia(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.autor = request.user
+        #if form.is_valid():
+        post = form.save(commit=False)
+        post.autor = request.user
             #post.published_date = timezone.now()
-            post.save()
-            return redirect('contact/', pk=post.pk)
+        context = {
+            'sugerencias': a,
+            'form': form
+        }
+        post.save()
+        console.log(post)
+        return redirect('contact/', context, pk=post.pk)
     else:
         form = fSugerencia()
     context = {
