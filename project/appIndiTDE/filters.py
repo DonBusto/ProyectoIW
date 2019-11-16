@@ -13,5 +13,4 @@ class RopaFilter(django_filters.FilterSet):
        
         fields = ['tipo', 'pfinal', 'categoria','genero', 'marca',]
 
-
     

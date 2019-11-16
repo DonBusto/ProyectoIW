@@ -205,11 +205,11 @@
                                         </div>
                                         <div class="media-body">
                                             <h4>{{c.usuario}}</h4>
+                                            {% with ''|center:c.valoracion as range %}
+                                            {% for i in range %}
                                             <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            {%endfor%}
+                                            {%endwith%}
                                         </div>
                                     </div>
                                     <p>
