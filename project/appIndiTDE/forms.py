@@ -12,6 +12,7 @@ class fSugerencia(forms.ModelForm):
     class Meta:
         model = Sugerencia
         fields = ('autor', 'titulo', 'texto')
+        
         widgets = {'autor': forms.TextInput(),
                    'titulo': forms.TextInput(),
                    'texto': forms.TextInput()

@@ -51,7 +51,7 @@ class Sugerencia(models.Model):
     texto = models.CharField(max_length = 240)
 
     def __str__(self):
-        return self.nombre
+        return self.autor.nombre
 
 class Comentario(models.Model):
     id = models.CharField(max_length = 10, primary_key =True)

@@ -85,10 +85,10 @@
                     <ul class="list">
                         <li>
                             <a class="active" href="#">
-                                <span>Category</span> : {{prenda.categoria}}</a>
+                                <span>Categoria</span> : {{prenda.categoria}}</a>
                         </li>
                         <li>
-                            <a href="#"> <span>Availibility</span> : In Stock</a>
+                            <a href="#"> <span>Disponibilidad</span> : En Stock</a>
                         </li>
                     </ul>
                     <p>
@@ -113,17 +113,17 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                       aria-selected="true">Description</a>
+                       aria-selected="true">Descripcion</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                        aria-controls="profile"
-                       aria-selected="false">Specification</a>
+                       aria-selected="false">Especificaciones:</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
                        aria-controls="review"
-                       aria-selected="false">Reviews</a>
+                       aria-selected="false">Opiniones</a>
                 </li>
 
             </ul>
@@ -144,17 +144,17 @@
                             <div class="row total_rate">
                                 <div class="col-6">
                                     <div class="box_total">
-                                        <h5>Overall</h5>
+                                        <h5>Valoración media:</h5>
                                         <h4>{{ avg }}</h4>
-                                        <h6>({{ comentarios|length }} Reviews)</h6>
+                                        <h6>({{ comentarios|length }} Opiniones)</h6>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="rating_list">
-                                        <h3>Basado en {{ comentarios|length }} reviews</h3>
+                                        <h3>Basado en {{ comentarios|length }} opiniones</h3>
                                         <ul class="list">
                                             <li>
-                                                <a href="#">5 Star
+                                                <a href="#">5 Estrellas
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -162,35 +162,25 @@
                                                     <i class="fa fa-star"></i> {{recuentoVals.0}}</a>
                                             </li>
                                             <li>
-                                                <a href="#">4 Star
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#">4 Estrellas
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i> {{recuentoVals.1}}</a>
                                             </li>
                                             <li>
-                                                <a href="#">3 Star
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#">3 Estrellas
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i> {{recuentoVals.2}}</a>
                                             </li>
                                             <li>
-                                                <a href="#">2 Star
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#">2 Estrellas
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i> {{recuentoVals.3}}</a>
                                             </li>
                                             <li>
-                                                <a href="#">1 Star
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#">1 Estrella
                                                     <i class="fa fa-star"></i> {{recuentoVals.4}}</a>
                                             </li>
                                         </ul>

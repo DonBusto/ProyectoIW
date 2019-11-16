@@ -1,20 +1,7 @@
 {% extends "inditde/base.html" %}
 {% load static %}
 {% block content %}
-<section class="breadcrumb breadcrumb_bg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="breadcrumb_iner">
-                    <div class="breadcrumb_iner_item">
-                        <p>Home / Contact</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- breadcrumb start-->
+
 
 <!-- ================ contact section start ================= -->
 <section class="contact-section padding_top">
@@ -63,19 +50,20 @@
 
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">Site reviews</h2>
+                <h2 class="contact-title">Sugerencias:</h2>
             </div>
             <div class="col-lg-8">
                 {% for s in sugerencias %}
-                <h3><b>{{s.titulo}}</b></h3>
-                <h6>Usuario: {{s.autor.nombre}}</h6>
-                <h5>{{s.texto}}</h5>
+                    <h3><b>{{s.titulo}}</b></h3>
+                    <h6>Usuario: {{s.autor.nombre}}</h6>
+                    <h5>{{s.texto}}</h5>
                 {% endfor %}
             </div>
         </div>
+        <br><br>
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">Get in Touch</h2>
+                <h2 class="contact-title">Mandar Sugerencia:</h2>
             </div>
             <div class="col-lg-8">
                 <form class="form-contact contact_form" method="POST" name="fSugerencia" id="fSugerencia"
@@ -115,7 +103,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <button href="{% url 'contact' %}" class="btn_3 button-contactForm" type="submit">Send Message</button>
-
+                        <h4> {{mensage}}</h4>
                     </div>
                 </form>
             </div>

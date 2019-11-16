@@ -18,29 +18,17 @@ def index(request):
             strEmail = "Ahora estás suscrito a nuestra newsletter. Pronto recibirás noticias de nuestros productos."
             send_mail("Te has suscrito a nuestra newsletter", strEmail, settings.EMAIL_HOST_USER, to_email, fail_silently=False)
 
-        a = list(get_all_clothes())
-        masculino = get_by_genre(a, 'masculino')
-        femenino = get_by_genre(a, 'femenino')
-        unisex = get_by_genre(a, 'unisex')
-        context = {'my_ropa': order_by_disccount(a),
-                   'marcas': get_all_brands(a),
-                   'my_ropa_masculino': order_by_disccount(masculino),
-                   'my_ropa_femenino': order_by_disccount(femenino),
-                   'my_ropa_unisex': order_by_disccount(unisex),
-                   }
-        return render(request, 'inditde/index.html', context)
-    else:
-        a = list(get_all_clothes())
-        masculino = get_by_genre(a, 'masculino')
-        femenino = get_by_genre(a, 'femenino')
-        unisex = get_by_genre(a, 'unisex')
-        context = {'my_ropa': order_by_disccount(a),
-                   'marcas': get_all_brands(a),
-                   'my_ropa_masculino': order_by_disccount(masculino),
-                   'my_ropa_femenino': order_by_disccount(femenino),
-                   'my_ropa_unisex': order_by_disccount(unisex),
-                   }
-        return render(request, 'inditde/index.html', context)
+    a = list(get_all_clothes())
+    masculino = get_by_genre(a, 'masculino')
+    femenino = get_by_genre(a, 'femenino')
+    unisex = get_by_genre(a, 'unisex')
+    context = {'my_ropa': order_by_disccount(a),
+                'marcas': get_all_brands(a),
+                'my_ropa_masculino': order_by_disccount(masculino),
+                'my_ropa_femenino': order_by_disccount(femenino),
+                'my_ropa_unisex': order_by_disccount(unisex),
+                }
+    return render(request, 'inditde/index.html', context)
 
 
 
@@ -63,6 +51,8 @@ def clothe(request, id_clothe):
 
 def contact(request):
     a = list(get_sugerencias())
+    form = fSugerencia()
+    msg=""
     if request.method == "POST":
         form = fSugerencia(request.POST)
         print(form)
@@ -70,19 +60,18 @@ def contact(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.autor = request.user
-                #post.published_date = timezone.now()
-            context = {
-                'sugerencias': a,
-                'form': form
-            }
+            #post.published_date = timezone.now()
             post.save()
-            return redirect('contact/', context, pk=post.pk)
-    else:
-        form = fSugerencia()
+            msg="Sugerencia enviada con éxito."
+        else:
+            msg="Error al enviar la sugerencia, verifique que ha iniciado sesión."
+
     context = {
         'sugerencias': a,
-        'form': form
-    }
+        'form': form,
+        'marcas': get_all_brands(get_all_clothes()),
+        'mensage': msg,
+        }
     return render(request, 'inditde/contact.html', context)
 
 
@@ -182,7 +171,10 @@ def get_average(comentarios):
     for i in comentarios:
         suma += (i.valoracion)
         contador += 1
-    avg = float(suma / contador)
+    if contador != 0:
+        avg = float(suma / contador)
+    else:
+        avg = 0
     return avg
 
 def get_by_type(ropas, tipo):
