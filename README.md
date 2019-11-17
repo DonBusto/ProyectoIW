@@ -19,7 +19,7 @@ Visualizar los detalles de una categoría, incluida la lista asociada de ofertas
 Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la marca y la lista de categorías asociadas
 
 
-IndiTDE:
+# IndiTDE:
 (Página basada en plantilla winter: https://colorlib.com/wp/template/winter/)
 
 Página base:
