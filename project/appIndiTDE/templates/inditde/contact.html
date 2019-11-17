@@ -52,13 +52,17 @@
             <div class="col-12">
                 <h2 class="contact-title">Sugerencias:</h2>
             </div>
-            <div class="col-lg-8">
-                {% for s in sugerencias %}
+            
+            {% for s in sugerencias %}
+                <div class="col-lg-8">    
                     <h3><b>{{s.titulo}}</b></h3>
-                    <h6>Usuario: {{s.autor.nombre}}</h6>
+                    <h6>Usuario: {{s.nombre}}</h6>
                     <h5>{{s.texto}}</h5>
-                {% endfor %}
-            </div>
+                    <p></p><p></p>
+                </div>
+                
+            {% endfor %}
+
         </div>
         <br><br>
         <div class="row">
@@ -79,7 +83,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control" name="autor" form="fSugerencia" required id="id_autor" type="text"
+                                <input class="form-control" name="nombre" form="fSugerencia" required id="id_nombre" type="text"
                                        onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = 'Enter your name'" placeholder='Enter your name'>
                             </div>

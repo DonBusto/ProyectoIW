@@ -46,12 +46,12 @@ class Usuario(models.Model):
         return self.nombre
 
 class Sugerencia(models.Model):
-    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    nombre = models.CharField(max_length = 20, default="anonymous")
     titulo = models.CharField(max_length = 30)
     texto = models.CharField(max_length = 240)
 
     def __str__(self):
-        return self.autor.nombre
+        return self.nombre
 
 class Comentario(models.Model):
     id = models.CharField(max_length = 10, primary_key =True)

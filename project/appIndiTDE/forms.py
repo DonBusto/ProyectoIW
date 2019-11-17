@@ -11,9 +11,9 @@ class RegisterForm(forms.ModelForm):
 class fSugerencia(forms.ModelForm):
     class Meta:
         model = Sugerencia
-        fields = ('autor', 'titulo', 'texto')
+        fields = ('nombre', 'titulo', 'texto')
         
-        widgets = {'autor': forms.TextInput(),
+        widgets = {'nombre': forms.TextInput(),
                    'titulo': forms.TextInput(),
                    'texto': forms.TextInput()
                    }
