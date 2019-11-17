@@ -45,7 +45,7 @@ Página Tienda:
 	Se puede filtrar por categoría "formal, deporte, ...", marcas y/o género. Al dar a buscar se efectuará el filtrado.
 	Al hacer click en el titulo del artículo lleva a su descripción.
 	
-Página Clothe:
+Página Prenda:
 	Muestra el artículo y toda su información.
 	La marca redirige a la información de la marca
 	El apartado opiniones solo muestra las opiniones metidas desde /admin/ puesto que para esta entrega no se pide tanto.
