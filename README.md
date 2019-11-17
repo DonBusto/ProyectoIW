@@ -17,3 +17,45 @@ Visualizar los detalles de una marca, incluida la lista asociada de ofertas de p
 Visualizar los detalles de una categoría, incluida la lista asociada de ofertas de ropa.
 
 Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la marca y la lista de categorías asociadas
+
+
+IndiTDE:
+(Página basada en plantilla winter: https://colorlib.com/wp/template/winter/)
+
+Página base:
+	Estructura por capas.
+	El apartado marcas se despliega y muestra todas las marcas con las que trabajamos, al hacer click en alguna lleva a la información de esta.
+	En la parte superior se pueden buscar artículos por su nombre.
+	Carga de animaciones y efectos
+	Footer con imagenes de varias marcas y su redirección a su instagram
+	Todas las categorias, marcas y dirección de contacto.
+	Al estar en la página contacto aparecerá en el footer la posibilidad de meter tu email para suscribirse al envío de la newsletter
+	
+	
+Página Index:
+	Al hacer click en mujer, hombre o unisex, redirige a la página Tienda filtrando los resultados por el genero elegido.
+	En el apartado top ofertas saldrán las 4 ofertas que tengan mayor descuento en €.
+	Animaciones y eventos reutilizados y añadidos los del apartado de top ofertas para que solo aparezcan las 4 del genero elegido.
+	Al hacer click en el titulo de cualquier prenda te llevara a la pagina de su descripción.
+
+Página Tienda:
+	Hemos reutilizado ciertas funciones y otras las hemos redefinido.
+	Por defecto se muestran 6 prendas y dandole a mostrar más se verán todas, dando a mostrar menos se volverán a ver solo 6.
+	Hemos usado filters.py
+	Se puede filtrar por categoría "formal, deporte, ...", marcas y/o género. Al dar a buscar se efectuará el filtrado.
+	Al hacer click en el titulo del artículo lleva a su descripción.
+	
+Página Clothe:
+	Muestra el artículo y toda su información.
+	La marca redirige a la información de la marca
+	El apartado opiniones solo muestra las opiniones metidas desde /admin/ puesto que para esta entrega no se pide tanto.
+	Aparecen las especificaciones y la descripción correspondiente al artículo.
+
+Página Marca:
+	Imagen de la marca, nombre, titulo y descripción.
+	Y todas las ropas de la marca.
+
+Página Contacto:
+	Se muestran todas las sugerencias dejadas por las personas.
+	Buzón de sugerencias para poder dejar sugerencias mediante form.
+	En el footer aparece un apartado para meter tu correo para suscribirse a la newsletter, se te enviará un correo de confirmación de que el correo ha sido recibido.
