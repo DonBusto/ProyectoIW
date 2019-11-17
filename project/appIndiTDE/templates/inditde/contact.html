@@ -52,15 +52,15 @@
             <div class="col-12">
                 <h2 class="contact-title">Sugerencias:</h2>
             </div>
-            
+
             {% for s in sugerencias %}
-                <div class="col-lg-8">    
+                <div class="col-lg-8">
                     <h3><b>{{s.titulo}}</b></h3>
                     <h6>Usuario: {{s.nombre}}</h6>
                     <h5>{{s.texto}}</h5>
                     <p></p><p></p>
                 </div>
-                
+
             {% endfor %}
 
         </div>
@@ -106,8 +106,10 @@
                         </div>
                     </div>
                     <div class="form-group mt-3">
-                        <button href="{% url 'contact' %}" class="btn_3 button-contactForm" type="submit">Send Message</button>
-                        <h4> {{mensage}}</h4>
+                      <form action="{% url 'contact' %}" class="btn_3 button-contactForm">
+                        <input type="submit" value="Send Message"/>
+                      </form>
+                      <h4>{{mensage}}</h4>
                     </div>
                 </form>
             </div>

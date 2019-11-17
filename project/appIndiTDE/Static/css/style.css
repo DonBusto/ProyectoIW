@@ -2455,7 +2455,7 @@ ul {
   background-repeat: no-repeat;
   width: 100%;
   height: 820px;
-  background-size: contain;    
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -4240,7 +4240,7 @@ ul {
 }
 
 /* line 928, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_product.scss */
-.product_description_area .tab-content .total_rate .rating_list .list li:nth-child a i:last-child {
+.product_description_area .tab-content .total_rate .rating_list .list a i:last-child {
   color: #eeeeee;
 }
 
@@ -5866,7 +5866,7 @@ ul {
 .new_arrival .single_arrivel_item .hover_text p {
   font-size: 16px;
   color: #fff;
-  letter-spacing: 2;
+  letter-spacing: 2px;
 }
 
 /* line 110, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_new_arrival.scss */
@@ -6559,7 +6559,7 @@ h6 {
 
 /* line 339, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_elements.scss */
 .genric-btn.disable {
-  color: #222222, 0.3;
+  color: #222222;
   background: #f9f9ff;
   border: 1px solid transparent;
   cursor: not-allowed;

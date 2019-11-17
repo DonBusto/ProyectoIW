@@ -56,7 +56,7 @@
                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Marcas
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                <div class="dropdown-menu" aria-label="navbarDropdown_2">
                                     {% for m in marcas%}
                                     <a class="dropdown-item" href="{% url 'brand' m.nombre %}">{{m.nombre}}</a>
 
@@ -201,7 +201,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="col-sm-6 col-lg-2">
                 <div class="single_footer_part">
                     <h4>Marcas</h4>
@@ -244,8 +244,8 @@
                             <!--Error part finish-->
                             </section>
                         </div>
-                    </div>  
-                </div>  
+                    </div>
+                </div>
             {% endif %}
         </div>
 
