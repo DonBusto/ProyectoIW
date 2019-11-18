@@ -20,9 +20,9 @@ Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la
 
 # How to run
 Para poder ejecutar el manage.py se puede hacer:
-virtualenv piw 
+* virtualenv piw 
 o:
-pip install requirements.txt
+* pip install requirements.txt
 
 # IndiTDE:
 (Página basada en plantilla winter: https://colorlib.com/wp/template/winter/)
