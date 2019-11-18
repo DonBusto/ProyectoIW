@@ -19,9 +19,8 @@ Visualizar los detalles de una categoría, incluida la lista asociada de ofertas
 Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la marca y la lista de categorías asociadas
 
 # How to run
-Para poder ejecutar el manage.py se puede hacer:
+Para poder ejecutar el manage.py se puede hacer de dos formas:
 * virtualenv piw 
-o:
 * pip install requirements.txt
 
 # IndiTDE:
