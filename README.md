@@ -1,4 +1,4 @@
-# ProyectoIW
+# Requisitos entrega ProyectoIW
 
 Descripción
 El proyecto "IndiTDE" deberá implementar un sitio web en el que se muestren diferentes ofertas de ropa de todas las marcas propiedad 
@@ -18,6 +18,10 @@ Visualizar los detalles de una categoría, incluida la lista asociada de ofertas
 
 Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la marca y la lista de categorías asociadas
 
+# How to run
+Para poder ejecutar el manage.py se puede hacer de dos formas:
+* virtualenv piw 
+* pip install requirements.txt
 
 # IndiTDE:
 (Página basada en plantilla winter: https://colorlib.com/wp/template/winter/)
