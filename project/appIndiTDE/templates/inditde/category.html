@@ -40,23 +40,23 @@
 
                                 <form method="get">
                                 <ul class="list">
-                                    <div class="l_w_title"><h3>Género</h3></div>
-                                    <div class="widgets_inner">
+                                    <li class="l_w_title"><h3>Género</h3></li>
+                                  <li class="widgets_inner">
                                     <li> </li>
                                     <li> {{ filter.form.genero}} </li>
-                                    </div><br>
-                                    <div class="l_w_title"><h3>Marcas</h3></div>
-                                    <div class="widgets_inner">
+                                  </li>
+                                    <li class="l_w_title"><h3>Marcas</h3></li>
+                                  <li class="widgets_inner">
                                     <li> </li>
                                     {% for choice in filter.form.marca %}
                                     <li> {{ choice.tag }} {{ choice.choice_label }} </li>
                                     {% endfor %}
-                                    </div>
-                                    <div class="l_w_title"><h3>Categoría</h3></div>
-                                    <div class="widgets_inner">
+                                  </li>
+                                    <li class="l_w_title"><h3>Categoría</h3></li>
+                                  <li class="widgets_inner">
                                     <li> </li>
                                     <li> {{ filter.form.categoria}} </li>
-                                    </div><br>
+                                  </li>
 
                                 </ul>
 
