@@ -1,0 +1,19 @@
+<!doctype html>
+
+{% extends "inditde/base.html" %}
+{% load static %}
+{% block content %}
+<form action="login" method="POST">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <input class="form-control" type="text" name="username" placeholder="username">
+        </li>
+        <li>
+            <input class="form-control" type="password" name="password" placeholder="password">
+        </li>
+    </ul>
+    <input type="Submit" class="btn_3 button-contactForm" value="Iniciar sesión">
+</form>
+
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Usuario, Ropa, Marca, Sugerencia, Comentario
 from django.core.mail import send_mail
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from django.conf import settings
 from .filters import RopaFilter
 from .forms import fSugerencia
@@ -15,14 +17,29 @@ def index(request):
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
     context = {'my_ropa': order_by_disccount(a),
-                'marcas': get_all_brands(a),
-                'my_ropa_masculino': order_by_disccount(masculino),
-                'my_ropa_femenino': order_by_disccount(femenino),
-                'my_ropa_unisex': order_by_disccount(unisex),
-                }
+               'marcas': get_all_brands(a),
+               'my_ropa_masculino': order_by_disccount(masculino),
+               'my_ropa_femenino': order_by_disccount(femenino),
+               'my_ropa_unisex': order_by_disccount(unisex),
+               }
+
     return render(request, 'inditde/index.html', context)
 
 
+def login(request):
+    if request.method=="POST":
+        username = request['username']
+        password = request['password']
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('/')
+        else:
+            messages.info(request,'Usuario no valido')
+            return redirect('/')
+
+    else:
+        return render(request, 'inditde/login.html')
 
 
 def clothe(request, id_clothe):
