@@ -25,6 +25,7 @@ from appIndiTDE.filters import RopaFilter
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name = 'index'),
+    path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('contact/', views.contact, name = 'contact'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),

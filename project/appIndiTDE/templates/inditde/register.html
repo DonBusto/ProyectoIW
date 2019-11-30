@@ -1,0 +1,21 @@
+<!doctype html>
+
+{% extends "inditde/base.html" %}
+{% load static %}
+{% block content %}
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    <div class="col-md-12 form-group p_star">
+
+        <input class="form-control" type="text" name="first_name" placeholder="Nombre">
+        <input class="form-control" type="text" name="last_name" placeholder="Apellidos">
+        <input class="form-control" type="text" name="username" placeholder="Usuario">
+        <input class="form-control" type="email" name="email" placeholder="E-Mail">
+        <input class="form-control" type="password" name="password" placeholder="Contraseña">
+<!--        <form action="{% url 'register' %}">-->
+            <input type="submit" class="btn_3" value="Registrarse">
+<!--        </form>-->
+    </div>
+</form>
+
+{% endblock %}

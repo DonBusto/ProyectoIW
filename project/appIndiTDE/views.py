@@ -26,17 +26,59 @@ def index(request):
     return render(request, 'inditde/index.html', context)
 
 
-def login(request):
-    if request.method=="POST":
-        username = request['username']
-        password = request['password']
-        user = auth.authenticate(username=username,password=password)
-        if user is not None:
-            auth.login(request,user)
-            return redirect('/')
+def register(request):
+    print(request)
+    a = list(get_all_clothes())
+    masculino = get_by_genre(a, 'masculino')
+    femenino = get_by_genre(a, 'femenino')
+    unisex = get_by_genre(a, 'unisex')
+    context = {'my_ropa': order_by_disccount(a),
+               'marcas': get_all_brands(a),
+               'my_ropa_masculino': order_by_disccount(masculino),
+               'my_ropa_femenino': order_by_disccount(femenino),
+               'my_ropa_unisex': order_by_disccount(unisex),
+               }
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+
+        if User.objects.filter(username=username).exists():
+            messages.info(request, 'Este usuario ya existe')
+            return redirect('index')
         else:
-            messages.info(request,'Usuario no valido')
-            return redirect('/')
+            user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
+                                            last_name=last_name)
+            user.save()
+            messages.info(request, 'Usuario creado')
+            return redirect('index')
+    else:
+        return render(request,'inditde/register.html')
+
+
+def login(request):
+    a = list(get_all_clothes())
+    masculino = get_by_genre(a, 'masculino')
+    femenino = get_by_genre(a, 'femenino')
+    unisex = get_by_genre(a, 'unisex')
+    context = {'my_ropa': order_by_disccount(a),
+               'marcas': get_all_brands(a),
+               'my_ropa_masculino': order_by_disccount(masculino),
+               'my_ropa_femenino': order_by_disccount(femenino),
+               'my_ropa_unisex': order_by_disccount(unisex),
+               }
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return render(request, 'inditde/index.html', context)
+        else:
+            messages.info(request, 'Usuario no valido')
+            return render(request, 'inditde/login.html')
 
     else:
         return render(request, 'inditde/login.html')
@@ -44,58 +86,57 @@ def login(request):
 
 def clothe(request, id_clothe):
     a = list(get_all_clothes())
-    listaC = list(get_comments_by_clothe(get_all_comments(),Ropa.objects.get(id=id_clothe)))
+    listaC = list(get_comments_by_clothe(get_all_comments(), Ropa.objects.get(id=id_clothe)))
     context = {
         'id': id_clothe,
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
-        'comentarios' : listaC,
-        'avg' : get_average(listaC),
-        'recuentoVals' : get_ratings_count(listaC),
+        'comentarios': listaC,
+        'avg': get_average(listaC),
+        'recuentoVals': get_ratings_count(listaC),
         'marcas': get_all_brands(a),
         'id': id_clothe
     }
     return render(request, 'inditde/prenda.html', context)
 
 
-def contact(request): 
-    msg=""    
+def contact(request):
+    msg = ""
     if request.method == "POST":
         form = fSugerencia(request.POST)
         print(request.POST)
         print(form)
         print(form.errors)
         if form.is_valid():
-            #post = form.save()
+            # post = form.save()
             su = Sugerencia()
             su.nombre = form.cleaned_data['nombre']
             su.titulo = form.cleaned_data['titulo']
             su.texto = form.cleaned_data['texto']
-            #post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             su.save()
-            msg="Sugerencia enviada con éxito."
+            msg = "Sugerencia enviada con éxito."
         else:
-            msg="Error al enviar la sugerencia."
-            
+            msg = "Error al enviar la sugerencia."
+
         temp_email = request.POST.get('email')
         to_email = [settings.EMAIL_HOST_USER, temp_email]
-        
+
         if (temp_email != ""):
             strEmail = "Ahora estás suscrito a nuestra newsletter. Pronto recibirás noticias de nuestros productos."
-            send_mail("Te has suscrito a nuestra newsletter", strEmail, settings.EMAIL_HOST_USER, to_email, fail_silently=False)
-            msg=""
+            send_mail("Te has suscrito a nuestra newsletter", strEmail, settings.EMAIL_HOST_USER, to_email,
+                      fail_silently=False)
+            msg = ""
     a = list(get_sugerencias())
     form = fSugerencia()
-    
+
     context = {
         'sugerencias': a,
         'form': form,
         'marcas': get_all_brands(get_all_clothes()),
         'mensage': msg,
-        }
+    }
     return render(request, 'inditde/contact.html', context)
-
-
 
 
 def brand(request, brand_name):
@@ -113,9 +154,11 @@ def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
 
+
 def get_all_comments():
     comments = Comentario.objects.all()
     return comments
+
 
 def get_sugerencias():
     sugerencias = Sugerencia.objects.all()
@@ -123,8 +166,9 @@ def get_sugerencias():
 
 
 def category(request):
-    filtro = RopaFilter(request.GET, queryset=  get_all_clothes())
-    return render(request, 'inditde/category.html', {'marcas': get_all_brands( get_all_clothes()),'filter':filtro})
+    filtro = RopaFilter(request.GET, queryset=get_all_clothes())
+    return render(request, 'inditde/category.html', {'marcas': get_all_brands(get_all_clothes()), 'filter': filtro})
+
 
 def get_all_categories(ropas):
     my_categorias = []
@@ -159,6 +203,7 @@ def get_by_brand(ropas, marca):
             my_ropa.append(i)
     return my_ropa
 
+
 def get_ratings_count(comments):
     cinco = 0
     cuatro = 0
@@ -166,7 +211,7 @@ def get_ratings_count(comments):
     dos = 0
     uno = 0
     for i in comments:
-        if(i.valoracion == 5):
+        if (i.valoracion == 5):
             cinco += 1
         elif (i.valoracion == 4):
             cuatro += 1
@@ -176,8 +221,9 @@ def get_ratings_count(comments):
             dos += 1
         else:
             uno += 1
-    vals = [cinco,cuatro,tres,dos,uno]
+    vals = [cinco, cuatro, tres, dos, uno]
     return vals
+
 
 def get_comments_by_clothe(comentarios, ropa):
     comments = []
@@ -185,6 +231,7 @@ def get_comments_by_clothe(comentarios, ropa):
         if (i.ropa.id == ropa.id):
             comments.append(i)
     return comments
+
 
 def get_average(comentarios):
     suma = 0
@@ -197,6 +244,7 @@ def get_average(comentarios):
     else:
         avg = 0
     return avg
+
 
 def get_by_type(ropas, tipo):
     my_ropa = []

@@ -3,17 +3,13 @@
 {% extends "inditde/base.html" %}
 {% load static %}
 {% block content %}
-<form action="login" method="POST">
+<form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
-    <ul>
-        <li>
-            <input class="form-control" type="text" name="username" placeholder="username">
-        </li>
-        <li>
-            <input class="form-control" type="password" name="password" placeholder="password">
-        </li>
-    </ul>
-    <input type="Submit" class="btn_3 button-contactForm" value="Iniciar sesión">
+    <div class="col-md-12 form-group p_star">
+        <input class="form-control" type="text" name="username" placeholder="username">
+        <input class="form-control" type="password" name="password" placeholder="password">
+        <input type="Submit" class="btn_3" value="Iniciar sesión">
+    </div>
 </form>
 
 {% endblock %}
