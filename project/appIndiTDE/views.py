@@ -14,19 +14,20 @@ import logging
 def index(request):
     a = list(get_all_clothes())
     c = list(get_carro_completo())
-    user = User
     masculino = get_by_genre(a, 'masculino')
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
     context = {
-        'user': user,
-        'carro': get_clothes_by_user(c, user),
+
+        'carro': get_clothes_by_user(c, User),
         'my_ropa': order_by_disccount(a),
         'marcas': get_all_brands(a),
         'my_ropa_masculino': order_by_disccount(masculino),
         'my_ropa_femenino': order_by_disccount(femenino),
         'my_ropa_unisex': order_by_disccount(unisex),
     }
+    if request.user.is_authenticated:
+        context['user'] = User
 
     return render(request, 'inditde/index.html', context)
 
@@ -89,7 +90,7 @@ def login(request):
                 'my_ropa_masculino': order_by_disccount(masculino),
                 'my_ropa_femenino': order_by_disccount(femenino),
                 'my_ropa_unisex': order_by_disccount(unisex),
-                'usuario': user,
+                'user': user,
             }
             auth.login(request, user)
             return render(request, 'inditde/index.html', context)
@@ -105,6 +106,7 @@ def clothe(request, id_clothe):
     a = list(get_all_clothes())
     listaC = list(get_comments_by_clothe(get_all_comments(), Ropa.objects.get(id=id_clothe)))
     context = {
+
         'id': id_clothe,
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
@@ -114,6 +116,10 @@ def clothe(request, id_clothe):
         'marcas': get_all_brands(a),
         'id': id_clothe
     }
+    if request.user.is_authenticated:
+        context['user'] = User
+    else:
+        print("Fallo")
     return render(request, 'inditde/prenda.html', context)
 
 
