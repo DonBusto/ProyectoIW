@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/templates/inditde/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/appIndiTDE/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/appIndiTDE/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/project/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/project/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +100,8 @@
       <workItem from="1573828539085" duration="7898000" />
       <workItem from="1573890080804" duration="20049000" />
       <workItem from="1573918988075" duration="3757000" />
-      <workItem from="1575108829026" duration="16642000" />
+      <workItem from="1575108829026" duration="16815000" />
+      <workItem from="1575137200667" duration="282000" />
     </task>
     <servers />
   </component>

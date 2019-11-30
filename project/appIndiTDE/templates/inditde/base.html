@@ -84,6 +84,8 @@
                     <div class="hearer_icon d-flex">
                         {% if user.is_authenticated %}
                         <p>Hola, {{user.first_name}}</p>
+                        {% else %}
+                        <p> </p>
                         {% endif %}
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
@@ -93,7 +95,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">
                                     {% for r in carro %}
-                                    <a class="dropdown-item" href="{% url 'clothe' r.id%}">{{r.nombre}}</a>
+                                    <a class="dropdown-item" href="{% url 'clothe' r.id%}">{{r.ropa.nombre}}</a>
 
                                     {% endfor %}
                                 </div>

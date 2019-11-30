@@ -19,7 +19,7 @@ def index(request):
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
     context = {
-        'user': User,
+        'user': user,
         'carro': get_clothes_by_user(c, user),
         'my_ropa': order_by_disccount(a),
         'marcas': get_all_brands(a),
@@ -226,13 +226,10 @@ def get_by_brand(ropas, marca):
 
 
 def get_clothes_by_user(carro, user):
-    print(user)
-    print("EEEEEE")
     my_carro = []
     for i in carro:
         if (i.usuario == user):
             my_carro.append(i)
-    print(my_carro)
     return my_carro
 
 
