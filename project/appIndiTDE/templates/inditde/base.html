@@ -75,6 +75,9 @@
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
+                        {% if user.is_authenticated %}
+                        <p>Hola, {{user.first_name}}</p>
+                        {% endif %}
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

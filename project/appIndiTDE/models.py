@@ -1,8 +1,13 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
 # Create your models here.
 
 TEME_CHOICES = (('masculino', 'Masculino'), ('femenino', 'FEMENINO'), ('unisex', 'UNISEX'), )
+
+class Carro(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    ropa = models.ForeignKey('Ropa', on_delete=models.CASCADE)
 
 
 class Marca(models.Model):
