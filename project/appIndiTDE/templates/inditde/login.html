@@ -3,12 +3,17 @@
 {% extends "inditde/base.html" %}
 {% load static %}
 {% block content %}
-<form action="{% url 'register' %}" method="POST">
+<form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
     <div class="col-md-12 form-group p_star">
         <input class="form-control" type="text" name="username" placeholder="username">
         <input class="form-control" type="password" name="password" placeholder="password">
         <input type="Submit" class="btn_3" value="Iniciar sesión">
+    </div>
+    <div class="col-md-12 form-group p_star">
+     {% for m in messages %}
+        <h3>{{m}} </h3>
+        {% endfor %}
     </div>
 </form>
 

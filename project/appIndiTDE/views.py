@@ -47,7 +47,10 @@ def register(request):
 
         if User.objects.filter(username=username).exists():
             messages.info(request, 'Este usuario ya existe')
-            return redirect('index')
+            return render(request, 'inditde/register.html')
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'Este correo ya se ha registrado')
+            return render(request, 'inditde/register.html')
         else:
             user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
                                             last_name=last_name)
