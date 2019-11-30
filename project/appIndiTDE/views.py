@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Usuario, Ropa, Marca, Sugerencia, Comentario
+from .models import Usuario, Ropa, Marca, Sugerencia, Comentario, Carro
 from django.core.mail import send_mail
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -13,15 +13,20 @@ import logging
 
 def index(request):
     a = list(get_all_clothes())
+    c = list(get_carro_completo())
+    user = User
     masculino = get_by_genre(a, 'masculino')
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
-    context = {'my_ropa': order_by_disccount(a),
-               'marcas': get_all_brands(a),
-               'my_ropa_masculino': order_by_disccount(masculino),
-               'my_ropa_femenino': order_by_disccount(femenino),
-               'my_ropa_unisex': order_by_disccount(unisex),
-               }
+    context = {
+        'user': User,
+        'carro': get_clothes_by_user(c, user),
+        'my_ropa': order_by_disccount(a),
+        'marcas': get_all_brands(a),
+        'my_ropa_masculino': order_by_disccount(masculino),
+        'my_ropa_femenino': order_by_disccount(femenino),
+        'my_ropa_unisex': order_by_disccount(unisex),
+    }
 
     return render(request, 'inditde/index.html', context)
 
@@ -58,25 +63,34 @@ def register(request):
             messages.info(request, 'Usuario creado')
             return redirect('index')
     else:
-        return render(request,'inditde/register.html')
+        return render(request, 'inditde/register.html')
 
+def logout(request):
+    auth.logout(request)
+    return render(request, 'inditde/index.html')
 
 def login(request):
     a = list(get_all_clothes())
     masculino = get_by_genre(a, 'masculino')
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
-    context = {'my_ropa': order_by_disccount(a),
-               'marcas': get_all_brands(a),
-               'my_ropa_masculino': order_by_disccount(masculino),
-               'my_ropa_femenino': order_by_disccount(femenino),
-               'my_ropa_unisex': order_by_disccount(unisex),
-               }
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+        request.session['username'] = username
         user = auth.authenticate(username=username, password=password)
         if user is not None:
+            context = {
+                'username': username,
+                'carro': get_clothes_by_user(list(Carro.objects.all()), user),
+                'my_ropa': order_by_disccount(a),
+                'marcas': get_all_brands(a),
+                'my_ropa_masculino': order_by_disccount(masculino),
+                'my_ropa_femenino': order_by_disccount(femenino),
+                'my_ropa_unisex': order_by_disccount(unisex),
+                'usuario': user,
+            }
             auth.login(request, user)
             return render(request, 'inditde/index.html', context)
         else:
@@ -157,6 +171,10 @@ def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
 
+def get_carro_completo():
+    carro = Carro.objects.all()
+    return carro
+
 
 def get_all_comments():
     comments = Comentario.objects.all()
@@ -205,6 +223,17 @@ def get_by_brand(ropas, marca):
         if (i.marca.nombre == marca.nombre):
             my_ropa.append(i)
     return my_ropa
+
+
+def get_clothes_by_user(carro, user):
+    print(user)
+    print("EEEEEE")
+    my_carro = []
+    for i in carro:
+        if (i.usuario == user):
+            my_carro.append(i)
+    print(my_carro)
+    return my_carro
 
 
 def get_ratings_count(comments):

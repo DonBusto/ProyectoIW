@@ -66,12 +66,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
                             </li>
+
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                            </li>
+                            {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'register' %}">Regístrate</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'login' %}">Inicia sesión</a>
                             </li>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
@@ -83,9 +90,9 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ti-bag"></i>
                             </a>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">
-                                    {% for r in my_ropa%}
+                                    {% for r in carro %}
                                     <a class="dropdown-item" href="{% url 'clothe' r.id%}">{{r.nombre}}</a>
 
                                     {% endfor %}
@@ -156,32 +163,32 @@
 <!-- subscribe_area part start-->
 <section class="instagram_photo">
     <div class="container-fluid">
-            <div class="row">
-    <div class="col-lg-12">
-        <div class="instagram_photo_iner">
-            <div class="single_instgram_photo">
-                <img src="{% static 'img/instagram/inst_1.png' %}" alt="">
-                <a href="https://www.instagram.com/nike/"><i class="ti-instagram"></i></a>
-            </div>
-            <div class="single_instgram_photo">
-                <img src="{% static 'img/instagram/inst_2.png' %}" alt="">
-                <a href="https://www.instagram.com/adidas/"><i class="ti-instagram"></i></a>
-            </div>
-            <div class="single_instgram_photo">
-                <img src="{% static 'img/instagram/inst_3.png' %}" alt="">
-                <a href="https://www.instagram.com/zara/"><i class="ti-instagram"></i></a>
-            </div>
-            <div class="single_instgram_photo">
-                <img src="{% static 'img/instagram/inst_4.png' %}" alt="">
-                <a href="https://www.instagram.com/pullandbear/"><i class="ti-instagram"></i></a>
-            </div>
-            <div class="single_instgram_photo">
-                <img src="{% static 'img/instagram/inst_5.png' %}" alt="">
-                <a href="https://www.instagram.com/lacoste/"><i class="ti-instagram"></i></a>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="instagram_photo_iner">
+                    <div class="single_instgram_photo">
+                        <img src="{% static 'img/instagram/inst_1.png' %}" alt="">
+                        <a href="https://www.instagram.com/nike/"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="{% static 'img/instagram/inst_2.png' %}" alt="">
+                        <a href="https://www.instagram.com/adidas/"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="{% static 'img/instagram/inst_3.png' %}" alt="">
+                        <a href="https://www.instagram.com/zara/"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="{% static 'img/instagram/inst_4.png' %}" alt="">
+                        <a href="https://www.instagram.com/pullandbear/"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="{% static 'img/instagram/inst_5.png' %}" alt="">
+                        <a href="https://www.instagram.com/lacoste/"><i class="ti-instagram"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </section>
 <!--::subscribe_area part end::-->
@@ -226,25 +233,26 @@
             </div>
             {% if request.resolver_match.url_name == "contact" %}
             <div class="col-sm-6 col-lg-4">
-                    <div class="single_footer_part">
-                        <h4>Newsletter</h4>
-                        <div id="mc_embed_signup">
-                            <section>
+                <div class="single_footer_part">
+                    <h4>Newsletter</h4>
+                    <div id="mc_embed_signup">
+                        <section>
                             <!--Error part start-->
-                                <form target="_blank" id="newsletter"method="post" class="subscribe_form relative mail_part">
-                                    {% csrf_token %}
-                                    <input type="email" name="email" id="newsletter-form-email" placeholder="Correo"
-                                        class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Correo'">
-                                    <button type="submit" name="submit" id="newsletter-submit"
-                                            class="email_icon newsletter-submit button-contactForm">Suscríbete
-                                    </button>
-                                </form>
+                            <form target="_blank" id="newsletter" method="post"
+                                  class="subscribe_form relative mail_part">
+                                {% csrf_token %}
+                                <input type="email" name="email" id="newsletter-form-email" placeholder="Correo"
+                                       class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Correo'">
+                                <button type="submit" name="submit" id="newsletter-submit"
+                                        class="email_icon newsletter-submit button-contactForm">Suscríbete
+                                </button>
+                            </form>
                             <!--Error part finish-->
-                            </section>
-                        </div>
+                        </section>
                     </div>
                 </div>
+            </div>
             {% endif %}
         </div>
 
@@ -279,12 +287,12 @@
 <!-- custom js -->
 <script src="{% static 'js/custom.js' %}"></script>
 <script>
-$(document).ready(function(){
-    $( "#search_form" ).submit(function( event ) {
-        window.location.href='/shop/?nombre='+ $("#search_input").val();
-        event.preventDefault();
+    $(document).ready(function () {
+        $("#search_form").submit(function (event) {
+            window.location.href = '/shop/?nombre=' + $("#search_input").val();
+            event.preventDefault();
+        });
     });
-});
 </script>
 </body>
 
