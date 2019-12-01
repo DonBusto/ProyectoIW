@@ -27,7 +27,8 @@ def index(request):
         'my_ropa_unisex': order_by_disccount(unisex),
     }
     if request.user.is_authenticated:
-        context['user'] = User
+        user = request.user
+        context['user'] = user
 
     return render(request, 'inditde/index.html', context)
 
@@ -66,9 +67,11 @@ def register(request):
     else:
         return render(request, 'inditde/register.html')
 
+
 def logout(request):
     auth.logout(request)
     return render(request, 'inditde/index.html')
+
 
 def login(request):
     a = list(get_all_clothes())
@@ -93,7 +96,7 @@ def login(request):
                 'user': user,
             }
             auth.login(request, user)
-            return render(request, 'inditde/index.html', context)
+            return redirect('index')
         else:
             messages.info(request, 'Usuario no valido')
             return render(request, 'inditde/login.html')
@@ -117,7 +120,7 @@ def clothe(request, id_clothe):
         'id': id_clothe
     }
     if request.user.is_authenticated:
-        context['user'] = User
+        context['user'] = request.user
     else:
         print("Fallo")
     return render(request, 'inditde/prenda.html', context)
@@ -158,7 +161,10 @@ def contact(request):
         'form': form,
         'marcas': get_all_brands(get_all_clothes()),
         'mensage': msg,
+
     }
+    if request.user.is_authenticated:
+        context['user'] = request.user
     return render(request, 'inditde/contact.html', context)
 
 
@@ -166,6 +172,8 @@ def brand(request, brand_name):
     brand = Marca.objects.get(nombre=brand_name)
     ropa = get_by_brand(list(get_all_clothes()), brand)
     context = {'my_ropa': ropa, 'marca': brand, 'marcas': get_all_brands(list(get_all_clothes()))}
+    if request.user.is_authenticated:
+        context['user'] = request.user
     return render(request, 'inditde/marca.html', context)
 
 
@@ -176,6 +184,7 @@ def order_by_disccount(ropas):
 def get_all_clothes():
     ropas = Ropa.objects.all()
     return ropas
+
 
 def get_carro_completo():
     carro = Carro.objects.all()
@@ -194,7 +203,10 @@ def get_sugerencias():
 
 def category(request):
     filtro = RopaFilter(request.GET, queryset=get_all_clothes())
-    return render(request, 'inditde/category.html', {'marcas': get_all_brands(get_all_clothes()), 'filter': filtro})
+    context = {'marcas': get_all_brands(get_all_clothes()), 'filter': filtro}
+    if request.user.is_authenticated:
+        context['user'] = request.user
+    return render(request, 'inditde/category.html', context)
 
 
 def get_all_categories(ropas):

@@ -5,66 +5,7 @@
 {% load static %}
 {% block content %}
 
-
-<!--================Single Product Area =================-->
 <div class="product_image_area section_padding">
-    <!--    <div class="container">-->
-    <!--        <div class="row s_product_inner">-->
-    <!--            <div class="col-lg-5">-->
-    <!--                <div class="product_slider_img">-->
-    <!--                    <div id="vertical">-->
-    <!--                        <div data-thumb="img/product_details/prodect_details_1.png">-->
-    <!--                            <img src="{% static 'img/product_details/prodect_details_1.png'%}"/>-->
-    <!--                        </div>-->
-    <!--                        &lt;!&ndash;<div data-thumb="img/product_details/prodect_details_2.png">&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<img src="img/product_details/prodect_details_2.png"/>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<div data-thumb="img/product_details/prodect_details_3.png">&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<img src="img/product_details/prodect_details_3.png" />&ndash;&gt;-->
-    <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<div data-thumb="img/product_details/prodect_details_4.png">&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<img src="img/product_details/prodect_details_4.png" />&ndash;&gt;-->
-    <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="col-lg-5 offset-lg-1">-->
-    <!--                <div class="s_product_text">-->
-    <!--                    <h3>Faded SkyBlu Denim Jeans</h3>-->
-    <!--                    <h2>$149.99</h2>-->
-    <!--                    <ul class="list">-->
-    <!--                        <li>-->
-    <!--                            <a class="active" href="#">-->
-    <!--                                <span>Category</span> : Household</a>-->
-    <!--                        </li>-->
-    <!--                        <li>-->
-    <!--                            <a href="#"> <span>Availibility</span> : In Stock</a>-->
-    <!--                        </li>-->
-    <!--                    </ul>-->
-    <!--                    <p>-->
-    <!--                        Mill Oil is an innovative oil filled radiator with the most modern technology. If you are-->
-    <!--                        looking for something that can make your interior look awesome, and at the same time.-->
-    <!--                    </p>-->
-    <!--                    <div class="card_area">-->
-    <!--                        <div class="product_count d-inline-block">-->
-    <!--                            <span class="inumber-decrement"> <i class="ti-minus"></i></span>-->
-    <!--                            <input class="input-number" type="text" value="1" min="0" max="10">-->
-    <!--                            <span class="number-increment"> <i class="ti-plus"></i></span>-->
-    <!--                        </div>-->
-    <!--                        &lt;!&ndash;<div class="add_to_cart">&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<a href="#" class="btn_3">add to cart</a>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<a href="#" class="like_us"> <i class="ti-heart"></i> </a>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<div class="social_icon">&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<a href="#" class="fb"><i class="ti-facebook"></i></a>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<a href="#" class="tw"><i class="ti-twitter-alt"></i></a>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;<a href="#" class="li"><i class="ti-linkedin"></i></a>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
     <div class="container">
 
         {% if prenda.nombre != NULL %}
@@ -81,27 +22,18 @@
             <div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
                     <h3>{{prenda.nombre}}</h3>
-                    <h2><span style="text-decoration:line-through;">{{prenda.pvp}} €</span>    {{prenda.pfinal}} €</h2>
+                    <h2><span style="text-decoration:line-through;">{{prenda.pvp}} €</span> {{prenda.pfinal}} €</h2>
                     <ul class="list">
                         <li>
                             <a class="active" href="#">
                                 <span>Categoria</span> : {{prenda.categoria}}</a>
                         </li>
                         <li>
-                            <a href="{% url 'brand' prenda.marca.nombre %}"> <span>Marca:</span> : {{prenda.marca.nombre}}</a>
+                            <a href="{% url 'brand' prenda.marca.nombre %}"> <span>Marca:</span> :
+                                {{prenda.marca.nombre}}</a>
                         </li>
                     </ul>
-                    <p>
-                        {{prenda.desc}} </p>
-                    <!--
-                    <div class="card_area">
-                        <div class="product_count d-inline-block">
-                            <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                            <input class="input-number" type="text" value="1" min="0" max="10">
-                            <span class="number-increment"> <i class="ti-plus"></i></span>
-                        </div>
-                    </div>
-                    -->
+                    <p> {{prenda.desc}} </p>
                 </div>
             </div>
             {% endif %}
@@ -190,15 +122,15 @@
                                 </div>
                             </div>
                             <div class="review_list">
-                                {% for c in comentarios %}
+                                {% for co in comentarios %}
                                 <div class="review_item">
                                     <div class="media">
                                         <div class="d-flex">
                                             <img src="img/product/single-product/review-1.png" alt=""/>
                                         </div>
                                         <div class="media-body">
-                                            <h4>{{c.usuario}}</h4>
-                                            {% with ''|center:c.valoracion as range %}
+                                            <h4>{{co.usuario}}</h4>
+                                            {% with ''|center:co.valoracion as range %}
                                             {% for i in range %}
                                             <i class="fa fa-star"></i>
                                             {%endfor%}
@@ -206,7 +138,7 @@
                                         </div>
                                     </div>
                                     <p>
-                                        {{c.texto}}
+                                        {{co.texto}}
                                     </p>
                                 </div>
                                 {% endfor %}
@@ -280,194 +212,7 @@
                         </div>
                     </div>
                 </div>
-                <!--                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">-->
-                <!--                    <div class="row">-->
-                <!--                        <div class="col-lg-6">-->
-                <!--                            <div class="comment_list">-->
-                <!--                                <div class="review_item">-->
-                <!--                                    <div class="media">-->
-                <!--                                        <div class="d-flex">-->
-                <!--                                            <img src="img/product/single-product/review-1.png" alt=""/>-->
-                <!--                                        </div>-->
-                <!--                                        <div class="media-body">-->
-                <!--                                            <h4>Blake Ruiz</h4>-->
-                <!--                                            <h5>12th Feb, 2017 at 05:56 pm</h5>-->
-                <!--                                            <a class="reply_btn" href="#">Reply</a>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <p>-->
-                <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,-->
-                <!--                                        sed do eiusmod tempor incididunt ut labore et dolore magna-->
-                <!--                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation-->
-                <!--                                        ullamco laboris nisi ut aliquip ex ea commodo-->
-                <!--                                    </p>-->
-                <!--                                </div>-->
-                <!--                                <div class="review_item reply">-->
-                <!--                                    <div class="media">-->
-                <!--                                        <div class="d-flex">-->
-                <!--                                            <img src="img/product/single-product/review-2.png" alt=""/>-->
-                <!--                                        </div>-->
-                <!--                                        <div class="media-body">-->
-                <!--                                            <h4>Blake Ruiz</h4>-->
-                <!--                                            <h5>12th Feb, 2017 at 05:56 pm</h5>-->
-                <!--                                            <a class="reply_btn" href="#">Reply</a>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <p>-->
-                <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,-->
-                <!--                                        sed do eiusmod tempor incididunt ut labore et dolore magna-->
-                <!--                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation-->
-                <!--                                        ullamco laboris nisi ut aliquip ex ea commodo-->
-                <!--                                    </p>-->
-                <!--                                </div>-->
-                <!--                                <div class="review_item">-->
-                <!--                                    <div class="media">-->
-                <!--                                        <div class="d-flex">-->
-                <!--                                            <img src="img/product/single-product/review-3.png" alt=""/>-->
-                <!--                                        </div>-->
-                <!--                                        <div class="media-body">-->
-                <!--                                            <h4>Blake Ruiz</h4>-->
-                <!--                                            <h5>12th Feb, 2017 at 05:56 pm</h5>-->
-                <!--                                            <a class="reply_btn" href="#">Reply</a>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <p>-->
-                <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,-->
-                <!--                                        sed do eiusmod tempor incididunt ut labore et dolore magna-->
-                <!--                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation-->
-                <!--                                        ullamco laboris nisi ut aliquip ex ea commodo-->
-                <!--                                    </p>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                        <div class="col-lg-6">-->
-                <!--                            <div class="review_box">-->
-                <!--                                <h4>Post a comment</h4>-->
-                <!--                                <form class="row contact_form" action="contact_process.php" method="post"-->
-                <!--                                      id="contactForm"-->
-                <!--                                      novalidate="novalidate">-->
-                <!--                                    <div class="col-md-12">-->
-                <!--                                        <div class="form-group">-->
-                <!--                                            <input type="text" class="form-control" id="name" name="name"-->
-                <!--                                                   placeholder="Your Full name"/>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="col-md-12">-->
-                <!--                                        <div class="form-group">-->
-                <!--                                            <input type="email" class="form-control" id="email" name="email"-->
-                <!--                                                   placeholder="Email Address"/>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="col-md-12">-->
-                <!--                                        <div class="form-group">-->
-                <!--                                            <input type="text" class="form-control" id="number" name="number"-->
-                <!--                                                   placeholder="Phone Number"/>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="col-md-12">-->
-                <!--                                        <div class="form-group">-->
-                <!--                <textarea class="form-control" name="message" id="message" rows="1"-->
-                <!--                          placeholder="Message"></textarea>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="col-md-12 text-right">-->
-                <!--                                        <button type="submit" value="submit" class="btn_3">-->
-                <!--                                            Submit Now-->
-                <!--                                        </button>-->
-                <!--                                    </div>-->
-                <!--                                </form>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
         </div>
     </section>
-    <!--================End Product Description Area =================-->
-
-    <!-- product_list part start-->
-    <!--<section class="product_list best_seller padding_bottom">-->
-    <!--<div class="container">-->
-    <!--<div class="row justify-content-center">-->
-    <!--<div class="col-lg-12">-->
-    <!--<div class="section_tittle text-center">-->
-    <!--<h2>Best Sellers</h2>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-    <!--<div class="col-lg-3 col-sm-6">-->
-    <!--<div class="single_category_product">-->
-    <!--<div class="single_category_img">-->
-    <!--<img src="img/category/category_2.png" alt="">-->
-    <!--<div class="category_social_icon">-->
-    <!--<ul>-->
-    <!--<li><a href="#"><i class="ti-heart"></i></a></li>-->
-    <!--<li><a href="#"><i class="ti-bag"></i></a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="category_product_text">-->
-    <!--<a href="single-product.html"><h5>Long Sleeve TShirt</h5></a>-->
-    <!--<p>$150.00</p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-lg-3 col-sm-6">-->
-    <!--<div class="single_category_product">-->
-    <!--<div class="single_category_img">-->
-    <!--<img src="img/category/category_3.png" alt="">-->
-    <!--<div class="category_social_icon">-->
-    <!--<ul>-->
-    <!--<li><a href="#"><i class="ti-heart"></i></a></li>-->
-    <!--<li><a href="#"><i class="ti-bag"></i></a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="category_product_text">-->
-    <!--<a href="single-product.html"><h5>Long Sleeve TShirt</h5></a>-->
-    <!--<p>$150.00</p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-lg-3 col-sm-6">-->
-    <!--<div class="single_category_product">-->
-    <!--<div class="single_category_img">-->
-    <!--<img src="img/category/category_4.png" alt="">-->
-    <!--<div class="category_social_icon">-->
-    <!--<ul>-->
-    <!--<li><a href="#"><i class="ti-heart"></i></a></li>-->
-    <!--<li><a href="#"><i class="ti-bag"></i></a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="category_product_text">-->
-    <!--<a href="single-product.html"><h5>Long Sleeve TShirt</h5></a>-->
-    <!--<p>$150.00</p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-lg-3 col-sm-6">-->
-    <!--<div class="single_category_product">-->
-    <!--<div class="single_category_img">-->
-    <!--<img src="img/category/category_5.png" alt="">-->
-    <!--<div class="category_social_icon">-->
-    <!--<ul>-->
-    <!--<li><a href="#"><i class="ti-heart"></i></a></li>-->
-    <!--<li><a href="#"><i class="ti-bag"></i></a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="category_product_text">-->
-    <!--<a href="single-product.html"><h5>Long Sleeve TShirt</h5></a>-->
-    <!--<p>$150.00</p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</section>-->
-    <!-- product_list part end-->
-
-
     {%endblock%}
