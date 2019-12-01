@@ -164,8 +164,10 @@
                                         <img src="{{MEDIA_URL}}{{r.img.url}}" alt="">
                                         <div class="category_social_icon">
                                             <ul>
-                                                <li><a href="#"><i class="ti-heart"></i></a></li>
-                                                <li><a href="#"><i class="ti-bag"></i></a></li>
+                                                <form action="{% url 'addtocart' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                                </form>
                                             </ul>
                                         </div>
                                         <div class="category_product_text">

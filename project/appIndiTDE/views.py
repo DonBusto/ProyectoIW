@@ -18,8 +18,6 @@ def index(request):
     femenino = get_by_genre(a, 'femenino')
     unisex = get_by_genre(a, 'unisex')
     context = {
-
-        'carro': get_clothes_by_user(c, User),
         'my_ropa': order_by_disccount(a),
         'marcas': get_all_brands(a),
         'my_ropa_masculino': order_by_disccount(masculino),
@@ -29,6 +27,8 @@ def index(request):
     if request.user.is_authenticated:
         user = request.user
         context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
+
 
     return render(request, 'inditde/index.html', context)
 
@@ -107,9 +107,9 @@ def login(request):
 
 def clothe(request, id_clothe):
     a = list(get_all_clothes())
+    c = list(get_carro_completo())
     listaC = list(get_comments_by_clothe(get_all_comments(), Ropa.objects.get(id=id_clothe)))
     context = {
-
         'id': id_clothe,
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
@@ -120,7 +120,9 @@ def clothe(request, id_clothe):
         'id': id_clothe
     }
     if request.user.is_authenticated:
-        context['user'] = request.user
+        user = request.user
+        context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
     else:
         print("Fallo")
     return render(request, 'inditde/prenda.html', context)
@@ -128,6 +130,7 @@ def clothe(request, id_clothe):
 
 def contact(request):
     msg = ""
+    c = list(get_carro_completo())
     if request.method == "POST":
         form = fSugerencia(request.POST)
         print(request.POST)
@@ -164,16 +167,21 @@ def contact(request):
 
     }
     if request.user.is_authenticated:
-        context['user'] = request.user
+        user = request.user
+        context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
     return render(request, 'inditde/contact.html', context)
 
 
 def brand(request, brand_name):
+    c = list(get_carro_completo())
     brand = Marca.objects.get(nombre=brand_name)
     ropa = get_by_brand(list(get_all_clothes()), brand)
     context = {'my_ropa': ropa, 'marca': brand, 'marcas': get_all_brands(list(get_all_clothes()))}
     if request.user.is_authenticated:
-        context['user'] = request.user
+        user = request.user
+        context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
     return render(request, 'inditde/marca.html', context)
 
 
@@ -202,10 +210,15 @@ def get_sugerencias():
 
 
 def category(request):
+    c = list(get_carro_completo())
     filtro = RopaFilter(request.GET, queryset=get_all_clothes())
     context = {'marcas': get_all_brands(get_all_clothes()), 'filter': filtro}
     if request.user.is_authenticated:
-        context['user'] = request.user
+        user = request.user
+        context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
+    if request.method == 'POST':
+        print("in process")
     return render(request, 'inditde/category.html', context)
 
 
@@ -307,6 +320,10 @@ def get_by_priceRange(ropas, min, max):
         if (ropas[i].pfinal >= min and ropas[i].pfinal <= max):
             my_ropa.append(ropas[i])
     return my_ropa
-# def new_suggestion(request):
-#        Sugerencia = Sugerencia()
-#    return render(request, 'poner_url', {'Sugerencia': Sugerencia})
+
+def addtocart(request, item):
+    if request.method == 'POST':
+        newItem = Carro.objects.create(usuario=request.user, ropa=item)
+        print("Objeto creado")
+        newItem.save()
+    return redirect('category')
