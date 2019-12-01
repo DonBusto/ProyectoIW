@@ -30,6 +30,17 @@ def index(request):
         context['carro'] = get_clothes_by_user(c, user)
     return render(request, 'inditde/index.html', context)
 
+def cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        c = list(get_carro_completo())
+        context = {
+            'carro' : get_clothes_by_user(c, user),
+            'total' : get_total(get_clothes_by_user(c, user))
+        }
+        return render(request, 'inditde/cart.html', context)
+    else:
+        return redirect('index')
 
 def register(request):
     print(request)
@@ -334,5 +345,3 @@ def addtocart(request, item):
         newItem.save()
     return redirect('category')
 
-def cart(request):
-    return request

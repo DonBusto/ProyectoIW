@@ -83,14 +83,14 @@
                     </div>
                     <div class="hearer_icon d-flex">
                         {% if user.is_authenticated %}
-                        <p>Hola, {{user.first_name}}</p>
+                        <p>Hola, {{user.first_name}} &nbsp;</p>
                         {% else %}
                         <p></p>
                         {% endif %}
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                            <a class="dropdown-toggle" href="#}" id="navbarDropdown3" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti-bag"></i>
+                                <a class="ti-bag"></a>
                             </a>
 
                             {% if user.is_authenticated %}
@@ -99,6 +99,8 @@
                                     {% for r in carro %}
                                     <a class="dropdown-item" href="{% url 'clothe' r.ropa.id%}">{{r.ropa.nombre}}</a>
                                     {% endfor %}
+                                    <a class="dropdown-item" href="{% url 'cart' %}"><strong>Ver carrito</strong></a>
+
                                 </div>
                             </div>
                             {% endif %}
@@ -135,29 +137,29 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="single_shopping_details">
                     <img src="{% static 'img/icon/icon_1.png'%}" alt="">
-                    <h4>Free shipping</h4>
-                    <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    <h4>Sigue tu envío</h4>
+                    <p>Desde IndiTDE te ofreceremos todo tipo de facilidades para que sigas tu envío con la mayor exactitud posible.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_shopping_details">
                     <img src="{% static 'img/icon/icon_2.png'%}" alt="">
-                    <h4>Free shipping</h4>
-                    <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    <h4>Facturas en PDF</h4>
+                    <p>Recibirás tu factura tanto en PDF como en papel, por si necesitas una copia.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_shopping_details">
                     <img src="{% static 'img/icon/icon_3.png' %}" alt="">
-                    <h4>Free shipping</h4>
-                    <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    <h4>Pago seguro</h4>
+                    <p>Los datos de tu tarjeta de crédito no se guardarán, por lo que podrás estar seguro de que no utilizaremos tus datos con fines dañinos.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_shopping_details">
                     <img src="{% static 'img/icon/icon_4.png' %}" alt="">
-                    <h4>Free shipping</h4>
-                    <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    <h4>Atención al cliente gratuita</h4>
+                    <p>Estamos a tu disposición en una franja horaria muy amplia, por lo que puedes llamarnos cuando más lo necesites.</p>
                 </div>
             </div>
         </div>
