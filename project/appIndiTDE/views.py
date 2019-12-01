@@ -28,8 +28,6 @@ def index(request):
         user = request.user
         context['user'] = user
         context['carro'] = get_clothes_by_user(c, user)
-
-
     return render(request, 'inditde/index.html', context)
 
 
@@ -218,7 +216,10 @@ def category(request):
         context['user'] = user
         context['carro'] = get_clothes_by_user(c, user)
     if request.method == 'POST':
-        print("in process")
+        id = request.POST.get('ropaCarro')
+        ropa = Ropa.objects.get(id=id)
+        addtocart(request,ropa)
+
     return render(request, 'inditde/category.html', context)
 
 
@@ -262,6 +263,12 @@ def get_clothes_by_user(carro, user):
         if (i.usuario == user):
             my_carro.append(i)
     return my_carro
+
+def get_total(carro):
+    suma = 0
+    for i in carro:
+        suma += i.ropa.pfinal
+    return suma
 
 
 def get_ratings_count(comments):
@@ -324,6 +331,8 @@ def get_by_priceRange(ropas, min, max):
 def addtocart(request, item):
     if request.method == 'POST':
         newItem = Carro.objects.create(usuario=request.user, ropa=item)
-        print("Objeto creado")
         newItem.save()
     return redirect('category')
+
+def cart(request):
+    return request
