@@ -1,96 +1,106 @@
-
 {% extends "inditde/base.html" %}
 { % load static % }
 
 {% block content %}
 
-  <section class="cart_area section_padding">
+<section class="cart_area section_padding">
     <div class="container">
-      <div class="cart_inner">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for r in carro %}
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{MEDIA_URL}}{{r.ropa.img.url}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>{{r.ropa.nombre}}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>{{r.ropa.pfinal}}</h5>
-                </td>
-              </tr>
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for r in carro %}
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="{{MEDIA_URL}}{{r.ropa.img.url}}" alt=""/>
+                                </div>
+                                <div class="media-body">
+                                    <p>{{r.ropa.nombre}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>{{r.ropa.pfinal}}</h5>
+                        </td>
+                    </tr>
 
-            {% endfor %}
-              <tr class="bottom_button">
-                <td>
-                  <a class="btn_1" href="{% url 'cart' %}">Actualizar carrito</a>
-                </td>
-                  <td></td>
-                <td></td>
-                  <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Subtotal</h5>
-                </td>
-                <td>
-                  <h5>{{total}}€</h5>
-                </td>
-              </tr>
-              <tr class="shipping_area">
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Envío</h5>
-                </td>
-                <td>
-                  <div class="shipping_box">
-                    <ul class="list">
-                      <li>
-                        Envío gratis
-                        <input type="radio" name="envio" value="gratis">
-                      </li>
-                      <li>
-                        Correos Express (+ 10.00 €)
-                        <input type="radio" name="envio" value="correos">
-                      </li>
-                      <li>
-                        DHL (+ 4.00 €)
-                        <input type="radio" name="envio" value="dhl">
-                      </li>
-                    </ul>
-                    <h6>
-                      Calcular envío
-                      <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </h6>
-                    <input class="post_code" type="text" name="calle" placeholder="Calle" />
-                    <input class="post_code" type="text" name="codigopost" placeholder="Código postal" />
-                    <a class="btn_1" href="#">Actualizar detalles</a>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="checkout_btn_inner float-right">
-            <a class="btn_1" href="{% url 'category' %}">CONTINUAR COMPRANDO</a>
-            <a class="btn_1 checkout_btn_1" href="#">AVANZAR Y PAGAR</a>
-          </div>
+                    {% endfor %}
+                    <tr class="bottom_button">
+                        <td>
+                            <a class="btn_1" href="{% url 'cart' %}">Actualizar carrito</a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h5>Subtotal</h5>
+                        </td>
+                        <td>
+                            <p id="precioSinEnv">{{total}} €</p>
+                        </td>
+                    </tr>
+                    <tr class="shipping_area">
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h5>Envío</h5>
+                        </td>
+                        <td>
+                            <div class="shipping_box">
+                                <ul class="list">
+                                    <li>
+                                        Envío gratis
+                                        <input type="radio" name="envio" value="gratis">
+                                    </li>
+                                    <li>
+                                        Correos Express (+ 10.00 €)
+                                        <input type="radio" name="envio" value="correos">
+                                    </li>
+                                    <li>
+                                        DHL (+ 4.00 €)
+                                        <input type="radio" name="envio" value="dhl">
+                                    </li>
+                                </ul>
+                                <input type="button" onclick="calcular()" value="Calcular precio con envío"/>
+                                <p id="precioTotal"></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" href="{% url 'category' %}">CONTINUAR COMPRANDO</a>
+                    <a class="btn_1 checkout_btn_1" href="{% url 'checkout' %}">AVANZAR Y PAGAR</a>
+                </div>
+            </div>
         </div>
-      </div>
-  </section>
+</section>
+<script type="text/javascript">
+    function calcular() {
+        var radios = document.getElementsByName('envio');
+        var pTotal = parseFloat(document.getElementById('precioSinEnv').textContent);
+        console.log(document.getElementById('precioSinEnv'))
+        if (radios[0].checked) {
+            document.getElementById("precioTotal").innerHTML = pTotal + " €";
+        }
+        if (radios[1].checked) {
+            document.getElementById("precioTotal").innerHTML = pTotal + 10 + " €";
+        }
+        if (radios[2].checked) {
+            document.getElementById("precioTotal").innerHTML = pTotal + 4 + " €";
+        }
+    }
+</script>
 {% endblock %}

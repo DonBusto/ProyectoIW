@@ -43,6 +43,18 @@ def cart(request):
     else:
         return redirect('index')
 
+def checkout(request):
+    if request.user.is_authenticated:
+        user = request.user
+        c = list(get_carro_completo())
+        context = {
+            'carro' : get_clothes_by_user(c, user),
+            'total' : get_total(get_clothes_by_user(c, user))
+        }
+        return render(request, 'inditde/checkout.html', context)
+    else:
+        return redirect('index')
+
 def register(request):
     print(request)
     a = list(get_all_clothes())
