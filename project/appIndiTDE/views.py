@@ -28,6 +28,7 @@ def index(request):
         user = request.user
         context['user'] = user
         context['carro'] = get_clothes_by_user(c, user)
+
     return render(request, 'inditde/index.html', context)
 
 def cart(request):
@@ -66,7 +67,7 @@ def register(request):
             return render(request, 'inditde/register.html')
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Este correo ya se ha registrado')
-            return render(request, 'inditde/register.html')
+            return render(request, 'inditde/register.html', context)
         else:
             user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
                                             last_name=last_name)
@@ -74,7 +75,7 @@ def register(request):
             messages.info(request, 'Usuario creado')
             return redirect('index')
     else:
-        return render(request, 'inditde/register.html')
+        return render(request, 'inditde/register.html', context)
 
 
 def logout(request):
@@ -108,7 +109,7 @@ def login(request):
             return redirect('index')
         else:
             messages.info(request, 'Usuario no valido')
-            return render(request, 'inditde/login.html')
+            return render(request, 'inditde/login.html', context)
 
     else:
         return render(request, 'inditde/login.html')
@@ -132,9 +133,15 @@ def clothe(request, id_clothe):
         user = request.user
         context['user'] = user
         context['carro'] = get_clothes_by_user(c, user)
+    if request.method == 'POST':
+        id = request.POST.get('ropaCarro')
+        item = Ropa.objects.get(id=id)
+        newItem = Carro.objects.create(usuario=request.user, ropa=item)
+        newItem.save()
+        return redirect('clothe')
     else:
-        print("Fallo")
-    return render(request, 'inditde/prenda.html', context)
+        return render(request, 'inditde/prenda.html', context)
+
 
 
 def contact(request):
