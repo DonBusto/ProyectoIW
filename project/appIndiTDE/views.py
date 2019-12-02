@@ -228,8 +228,10 @@ def category(request):
         context['carro'] = get_clothes_by_user(c, user)
     if request.method == 'POST':
         id = request.POST.get('ropaCarro')
-        ropa = Ropa.objects.get(id=id)
-        addtocart(request,ropa)
+        item = Ropa.objects.get(id=id)
+        newItem = Carro.objects.create(usuario=request.user, ropa=item)
+        newItem.save()
+        return redirect('category')
 
     return render(request, 'inditde/category.html', context)
 
@@ -339,9 +341,6 @@ def get_by_priceRange(ropas, min, max):
             my_ropa.append(ropas[i])
     return my_ropa
 
-def addtocart(request, item):
-    if request.method == 'POST':
-        newItem = Carro.objects.create(usuario=request.user, ropa=item)
-        newItem.save()
-    return redirect('category')
+
+       
 
