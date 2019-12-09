@@ -23,6 +23,12 @@ SECRET_KEY = '1-yd3x%p(wopz)%^u7kd6r29%p(9teosd%ag51nu81o_4cj8o6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SECURE_BROWSER_XSS_FILTER = False
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'proyectojbiw@gmail.com'
@@ -130,4 +136,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'appIndiTDE/static/media')
-
