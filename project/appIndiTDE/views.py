@@ -105,10 +105,10 @@ def register(request):
         email = request.POST.get('email')
 
         if User.objects.filter(username=username).exists():
-            messages.info(request, 'Este usuario ya existe')
+            messages.info(request, 'Error en la creación de usuario: Este usuario ya existe')
             return render(request, 'inditde/register.html')
         if User.objects.filter(email=email).exists():
-            messages.info(request, 'Este correo ya se ha registrado')
+            messages.info(request, 'Error en la creación de usuario: Este usuario ya existe.')
             return render(request, 'inditde/register.html', context)
         else:
             user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
