@@ -32,13 +32,29 @@ def index(request):
     return render(request, 'inditde/index.html', context)
 
 def cart(request):
+
     if request.user.is_authenticated:
         user = request.user
         c = list(get_carro_completo())
         context = {
-            'carro' : get_clothes_by_user(c, user),
+            'carro' : get_cantidades_ropa(c, user),
             'total' : get_total(get_clothes_by_user(c, user))
         }
+        return render(request, 'inditde/cart.html', context)
+
+    if request.method == 'POST':
+        printf("Entra al req method post?")
+        carroRopaID = request.POST.get('ropaEliminar')
+        carro = Carro.objects.filter(id = carroRopaID)
+        carro.delete()
+        user = request.user
+        logging.warning("dij")
+        c = list(get_carro_completo())
+        context = {
+            'carro' : get_cantidades_ropa(c, user),
+            'total' : get_total(get_clothes_by_user(c, user))
+        }
+
         return render(request, 'inditde/cart.html', context)
     else:
         return redirect('index')
@@ -60,6 +76,7 @@ def checkout(request):
     if request.user.is_authenticated:
         user = request.user
         c = list(get_carro_completo())
+
         context = {
             'carro' : get_clothes_by_user(c, user),
             'total' : get_total(get_clothes_by_user(c, user))
@@ -315,11 +332,14 @@ def get_cantidades_ropa(carro, user):
         if (i.usuario == user):
             if(len(my_carro) >= 1):
                 c = any(x.ropa.nombre == i.ropa.nombre for x in my_carro)
-                if(c):
-                    my_carro.index(i).ropa.cantidad = my_carro.index(i).ropa.cantidad + 1
+                if c:
+                    for x in my_carro:
+                        if x.ropa.nombre == i.ropa.nombre:
+                            x.ropa.cantidad = x.ropa.cantidad + 1
                 else:
                     i.ropa.cantidad = 1
                     my_carro.append(i)
+
             else:
                 i.ropa.cantidad = 1
                 my_carro.append(i)

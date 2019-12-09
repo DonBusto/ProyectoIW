@@ -23,7 +23,12 @@
                                     <img src="{{MEDIA_URL}}{{r.ropa.img.url}}" alt=""/>
                                 </div>
                                 <div class="media-body">
-                                    <p>{{r.ropa.nombre}}</p>
+                                    <p>{{r.ropa.nombre}}  x{{r.ropa.cantidad}}</p>
+                                    <form action="{% url 'cart' %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn_3" value="{{r.id}}" name='ropaEliminar' type="submit">Eliminar Prenda
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>
