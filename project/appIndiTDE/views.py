@@ -43,6 +43,19 @@ def cart(request):
     else:
         return redirect('index')
 
+def favourites(request):
+    if request.user.is_authenticated:
+        user = request.user
+        c = list(get_carro_completo())
+        context = {
+            'favoritos' : get_favourites_by_user(c, user),
+            'usuario': user
+
+        }
+        return render(request, 'inditde/favourites.html', context)
+    else:
+        return redirect('index')
+
 def checkout(request):
     if request.user.is_authenticated:
         user = request.user
@@ -296,6 +309,29 @@ def get_clothes_by_user(carro, user):
             my_carro.append(i)
     return my_carro
 
+def get_cantidades_ropa(carro, user):
+    my_carro = []
+    for i in carro:
+        if (i.usuario == user):
+            if(len(my_carro) >= 1):
+                c = any(x.ropa.nombre == i.ropa.nombre for x in my_carro)
+                if(c):
+                    my_carro.index(i).ropa.cantidad = my_carro.index(i).ropa.cantidad + 1
+                else:
+                    i.ropa.cantidad = 1
+                    my_carro.append(i)
+            else:
+                i.ropa.cantidad = 1
+                my_carro.append(i)
+    return my_carro
+
+def get_favourites_by_user(carro, user):
+    my_carro = []
+    for i in carro:
+        if (i.usuario == user):
+            my_carro.append(i)
+    return my_carro
+
 def get_total(carro):
     suma = 0
     for i in carro:
@@ -359,7 +395,3 @@ def get_by_priceRange(ropas, min, max):
         if (ropas[i].pfinal >= min and ropas[i].pfinal <= max):
             my_ropa.append(ropas[i])
     return my_ropa
-
-
-       
-

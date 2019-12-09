@@ -32,7 +32,7 @@ class Ropa(models.Model):
     desc = models.TextField()
     img = models.ImageField()
     marca = models.ForeignKey('Marca', on_delete = models.CASCADE)
-
+    cantidad = models.IntegerField(default = 1)
 
 
     """docstring for Ropa."""

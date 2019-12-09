@@ -5,6 +5,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>IndiTDE</title>
     <link rel="icon" href="{% static 'img/favicon.png' %}">
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     {% block head%} {% endblock %}
 </head>
 
@@ -100,6 +102,7 @@
                                     <a class="dropdown-item" href="{% url 'clothe' r.ropa.id%}">{{r.ropa.nombre}}</a>
                                     {% endfor %}
                                     <a class="dropdown-item" href="{% url 'cart' %}"><strong>Ver carrito</strong></a>
+                                    <a class="dropdown-item" href="{%url 'favourites' %}"><strong>Ver favoritos</strong></a>
 
                                 </div>
                             </div>

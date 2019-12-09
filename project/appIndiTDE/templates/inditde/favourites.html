@@ -1,0 +1,101 @@
+{% extends "inditde/base.html" %}
+{ % load static % }
+
+{% block content %}
+<div id="app-3">
+  <span v-if="seen">Ahora me ves</span>
+</div>
+
+<div id = "carritoVue">
+  <p>{{usuarioVue}}</p>
+  <p>p</p>
+  <section class="cart_area section_padding">
+      <div class="container">
+          <div class="cart_inner">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                      <tr>
+                          <th scope="col">Producto {{favouritesCount}}/20</th>
+                          <th scope="col">Precio</th>
+                      </tr>
+                      </thead>
+
+                      <h2 v-if = "ropas.length === 0">No has añadido ropa a tu lista de favoritos</h2>
+                      <template v-else>
+                        <h2>xd</h2>
+                        <tbody>
+                        <tr v-for="r in ropas">
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{{MEDIA_URL}}{{r.ropa.img.url}}" alt=""/>
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{r.ropa.nombre}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{r.ropa.pfinal}}</h5>
+                            </td>
+                        </tr>
+
+                        <tr class="bottom_button">
+                            <td>
+                                <a class="btn_1" href="{% url 'favourites' %}">Actualizar favoritos</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                      </template>
+                  </table>
+                  <div class="checkout_btn_inner float-right">
+                      <a class="btn_1" href="{% url 'category' %}">BUSCAR OTRA PRENDA</a>
+                      <a class="btn_1 checkout_btn_1" href="{% url 'cart' %}">IR AL CARRITO</a>
+                  </div>
+              </div>
+          </div>
+  </section>
+</div>
+<script type="text/javascript">
+  var carrito = new Vue({
+    el:"#carritoVue",
+    data:{
+      usuarioVue: "userVue",
+      ropas:[]
+    },
+    methods:{
+      loadFavoritos: function(favoritos){
+        for f in favoritos:
+          this.ropas.push(f);
+      },
+
+      loadUsuario: function(usuario){
+        this.usuario = usuario;
+      },
+      removeFavorito: function(nombre){
+        this.ropas.remove(nombre);
+      },
+
+    },
+    computed:{
+      favouritesCount(){
+        return this.ropas.length;
+      }
+
+    },
+
+  });
+  var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    seen: false
+  }
+});
+
+
+</script>
+{% endblock %}
