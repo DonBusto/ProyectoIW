@@ -48,7 +48,6 @@ def cart(request):
         carro = Carro.objects.filter(id = carroRopaID)
         carro.delete()
         user = request.user
-        logging.warning("dij")
         c = list(get_carro_completo())
         context = {
             'carro' : get_cantidades_ropa(c, user),
@@ -151,7 +150,7 @@ def login(request):
             return redirect('index')
         else:
             messages.info(request, 'Usuario no valido')
-            return render(request, 'inditde/login.html', context)
+            return render(request, 'inditde/login.html')
 
     else:
         return render(request, 'inditde/login.html')
