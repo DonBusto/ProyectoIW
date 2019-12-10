@@ -62,13 +62,30 @@
                 </li>
                   {% for r in carro %}
                 <li>
-                  <a href="{% url 'clothe' r.ropa.id %}">{{r.ropa.nombre}}
-                    <span class="last">{{r.ropa.pfinal}} €</span>
+                  <a href="{% url 'clothe' r.ropa.id %}">{{r.ropa.nombre}} x {{r.ropa.cantidad}}
+                    <span class="last">{% widthratio r.ropa.pfinal 1 r.ropa.cantidad %} €</span>
                   </a>
                 </li>
                   {% endfor %}
               </ul>
               <ul class="list list_2">
+                <li>
+                  <a href="#">Total sin envío
+                    <span>{{total}} €</span>
+                  </a>
+                </li>
+                <li>
+                  Envío gratis
+                  <input type="radio" name="envio" value="gratis">
+                </li>
+                <li>
+                    Correos Express (+ 10.00 €)
+                    <input type="radio" name="envio" value="correos">
+                </li>
+                <li>
+                    DHL (+ 4.00 €)
+                    <input type="radio" name="envio" value="dhl">
+                </li>
                 <li>
                   <a href="#">Total con envío
                     <span>{{total}} €</span>
@@ -108,4 +125,6 @@
       </div>
     </div>
   </section>
+
+  <script type="text/javascript" src="js/jqueryCheckout.js"></script>
 {% endblock %}

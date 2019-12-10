@@ -71,7 +71,7 @@ def checkout(request):
         c = list(get_carro_completo())
 
         context = {
-            'carro' : get_clothes_by_user(c, user),
+            'carro' : get_cantidades_ropa(c, user),
             'total' : get_total(get_clothes_by_user(c, user))
         }
         return render(request, 'inditde/checkout.html', context)
