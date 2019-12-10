@@ -1,14 +1,14 @@
 # Requisitos entrega ProyectoIW
 
 Descripción
-El proyecto "IndiTDE" deberá implementar un sitio web en el que se muestren diferentes ofertas de ropa de todas las marcas propiedad 
-de la empresa, clasificados por marcas (P&B, Bershka, Zara, etc.) y por categorías (Sudaderas, Chaquetas, Camisetas, etc.), pudiendo 
-una misma prenda estar en varias categorías. También se podrán ver los detalles de cada marca y de cada categoría, incluida la lista 
+El proyecto "IndiTDE" deberá implementar un sitio web en el que se muestren diferentes ofertas de ropa de todas las marcas propiedad
+de la empresa, clasificados por marcas (P&B, Bershka, Zara, etc.) y por categorías (Sudaderas, Chaquetas, Camisetas, etc.), pudiendo
+una misma prenda estar en varias categorías. También se podrán ver los detalles de cada marca y de cada categoría, incluida la lista
 de ofertas de ropa asociadas en cada caso.
 
 [E2] Funcionalidades básicas (2,5 puntos)
 
-Personalización de una plantilla (estructura de varios niveles) y sus estilos. 
+Personalización de una plantilla (estructura de varios niveles) y sus estilos.
 
 Visualizar la portada de "IndiTDE", mostrando dos ofertas de ropa de cada marca (p.ej. las más baratas o el criterio que queráis).
 
@@ -20,8 +20,8 @@ Visualizar los detalles de una oferta de ropa concreta, incluido el nombre de la
 
 # How to run
 Para poder ejecutar el manage.py se puede hacer de dos formas:
-* virtualenv piw 
-* pip install requirements.txt
+* virtualenv piw
+* pip install -r requirements.txt
 
 # IndiTDE:
 (Página basada en plantilla winter: https://colorlib.com/wp/template/winter/)
@@ -34,8 +34,8 @@ Página base:
 	Footer con imagenes de varias marcas y su redirección a su instagram
 	Todas las categorias, marcas y dirección de contacto.
 	Al estar en la página contacto aparecerá en el footer la posibilidad de meter tu email para suscribirse al envío de la newsletter
-	
-	
+
+
 Página Index:
 	Al hacer click en mujer, hombre o unisex, redirige a la página Tienda filtrando los resultados por el genero elegido.
 	En el apartado top ofertas saldrán las 4 ofertas que tengan mayor descuento en €.
@@ -48,7 +48,7 @@ Página Tienda:
 	Hemos usado filters.py
 	Se puede filtrar por categoría "formal, deporte, ...", marcas y/o género. Al dar a buscar se efectuará el filtrado.
 	Al hacer click en el titulo del artículo lleva a su descripción.
-	
+
 Página Prenda:
 	Muestra el artículo y toda su información.
 	La marca redirige a la información de la marca

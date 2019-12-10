@@ -42,8 +42,10 @@ def cart(request):
             carro.delete()
 
         c = list(get_carro_completo())
+        a = list(get_all_clothes())
         context = {
             'carro' : get_cantidades_ropa(c, user),
+            'marcas': get_all_brands(a),
             'total' : get_total(get_clothes_by_user(c, user))
         }
         return render(request, 'inditde/cart.html', context)
@@ -56,8 +58,10 @@ def favourites(request):
     if request.user.is_authenticated:
         user = request.user
         c = list(get_carro_completo())
+        a = list(get_all_clothes())
         context = {
             'favoritos' : get_favourites_by_user(c, user),
+            'marcas': get_all_brands(a),
             'usuario': user
 
         }
@@ -69,9 +73,10 @@ def checkout(request):
     if request.user.is_authenticated:
         user = request.user
         c = list(get_carro_completo())
-
+        a = list(get_all_clothes())
         context = {
             'carro' : get_cantidades_ropa(c, user),
+            'marcas': get_all_brands(a),
             'total' : get_total(get_clothes_by_user(c, user))
         }
         return render(request, 'inditde/checkout.html', context)
@@ -181,6 +186,7 @@ def clothe(request, id_clothe):
 
 def contact(request):
     msg = ""
+    b = list(get_all_clothes())
     c = list(get_carro_completo())
     if request.method == "POST":
         form = fSugerencia(request.POST)
@@ -213,7 +219,7 @@ def contact(request):
     context = {
         'sugerencias': a,
         'form': form,
-        'marcas': get_all_brands(get_all_clothes()),
+        'marcas': get_all_brands(b),
         'mensage': msg,
 
     }
