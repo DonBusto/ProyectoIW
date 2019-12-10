@@ -35,6 +35,12 @@ def cart(request):
 
     if request.user.is_authenticated:
         user = request.user
+
+        if request.method == 'POST':
+            carroRopaID = request.POST.get('ropaEliminar')
+            carro = Carro.objects.filter(id = carroRopaID)
+            carro.delete()
+
         c = list(get_carro_completo())
         context = {
             'carro' : get_cantidades_ropa(c, user),
@@ -42,19 +48,7 @@ def cart(request):
         }
         return render(request, 'inditde/cart.html', context)
 
-    if request.method == 'POST':
-        printf("Entra al req method post?")
-        carroRopaID = request.POST.get('ropaEliminar')
-        carro = Carro.objects.filter(id = carroRopaID)
-        carro.delete()
-        user = request.user
-        c = list(get_carro_completo())
-        context = {
-            'carro' : get_cantidades_ropa(c, user),
-            'total' : get_total(get_clothes_by_user(c, user))
-        }
 
-        return render(request, 'inditde/cart.html', context)
     else:
         return redirect('index')
 
