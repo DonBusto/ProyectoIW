@@ -70,9 +70,7 @@
                             </li>
 
                             {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                            </li>
+                          
                             {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'register' %}">Regístrate</a>
@@ -100,6 +98,7 @@
                                 <div class="single_product">
                                     <a class="dropdown-item" href="{% url 'cart' %}"><strong>Ver carrito</strong></a>
                                     <a class="dropdown-item" href="{%url 'favourites' %}"><strong>Ver favoritos</strong></a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
                                 </div>
                             </div>
                             {% endif %}
