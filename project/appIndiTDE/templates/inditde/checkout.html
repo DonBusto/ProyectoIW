@@ -71,24 +71,24 @@
               <ul class="list list_2">
                 <li>
                   <a href="#">Total sin envío
-                    <span>{{total}} €</span>
+                    <span id='precioSinEnv'>{{total}} €</span>
                   </a>
                 </li>
                 <li>
                   Envío gratis
-                  <input type="radio" name="envio" value="gratis">
+                  <input type="radio" onclick="calcular()" name="envio" value="gratis">
                 </li>
                 <li>
                     Correos Express (+ 10.00 €)
-                    <input type="radio" name="envio" value="correos">
+                    <input type="radio" onclick="calcular()" name="envio" value="correos">
                 </li>
                 <li>
                     DHL (+ 4.00 €)
-                    <input type="radio" name="envio" value="dhl">
+                    <input type="radio" onclick="calcular()" name="envio" value="dhl">
                 </li>
                 <li>
                   <a href="#">Total con envío
-                    <span>{{total}} €</span>
+                    <span id="precioTotal"></span>
                   </a>
                 </li>
               </ul>
@@ -126,5 +126,21 @@
     </div>
   </section>
 
-  <script type="text/javascript" src="js/jqueryCheckout.js"></script>
+
+  <script type="text/javascript">
+      function calcular() {
+          var radios = document.getElementsByName('envio');
+          var pTotal = parseFloat(document.getElementById('precioSinEnv').textContent);
+          console.log(document.getElementById('precioSinEnv'))
+          if (radios[0].checked) {
+              document.getElementById("precioTotal").innerHTML = pTotal + " €";
+          }
+          if (radios[1].checked) {
+              document.getElementById("precioTotal").innerHTML = pTotal + 10 + " €";
+          }
+          if (radios[2].checked) {
+              document.getElementById("precioTotal").innerHTML = pTotal + 4 + " €";
+          }
+      }
+  </script>
 {% endblock %}
