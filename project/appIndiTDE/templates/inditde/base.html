@@ -5,6 +5,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>IndiTDE</title>
     <link rel="icon" href="{% static 'img/favicon.png' %}">
@@ -97,12 +98,8 @@
                             {% if user.is_authenticated %}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">
-                                    {% for r in carro %}
-                                    <a class="dropdown-item" href="{% url 'clothe' r.ropa.id%}">{{r.ropa.nombre}}</a>
-                                    {% endfor %}
                                     <a class="dropdown-item" href="{% url 'cart' %}"><strong>Ver carrito</strong></a>
                                     <a class="dropdown-item" href="{%url 'favourites' %}"><strong>Ver favoritos</strong></a>
-
                                 </div>
                             </div>
                             {% endif %}
