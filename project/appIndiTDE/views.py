@@ -160,7 +160,7 @@ def clothe(request, id_clothe):
     c = list(get_carro_completo())
     listaC = list(get_comments_by_clothe(get_all_comments(), Ropa.objects.get(id=id_clothe)))
     context = {
-        'id': id_clothe,
+        'id': int(id_clothe),
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
         'comentarios': listaC,
@@ -178,7 +178,7 @@ def clothe(request, id_clothe):
         item = Ropa.objects.get(id=id)
         newItem = Carro.objects.create(usuario=request.user, ropa=item)
         newItem.save()
-        return redirect('clothe')
+        return render(request, 'inditde/prenda.html', context)
     else:
         return render(request, 'inditde/prenda.html', context)
 

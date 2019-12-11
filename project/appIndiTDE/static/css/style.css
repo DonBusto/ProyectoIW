@@ -570,6 +570,25 @@ ul {
   transition: 0.5s;
 }
 
+.btn_5 {
+  display: inline-block;
+  padding: 17px 17px;
+  border-radius: 50px;
+
+  background-color: #2f7dfc;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 400;
+  border: 1px solid #2f7dfc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+
+  font-size: 14px;
+  font-weight: normal;
+  color: #000000;
+  position: relative;
+}
+
 /* line 52, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_button.scss */
 .btn_3:hover {
   background-color: red;
@@ -4405,6 +4424,7 @@ ul {
 .review_box .btn_3 {
   padding: 13px 39px;
 }
+
 
 /* line 1084, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_product.scss */
 .review_box .contact_form {

@@ -36,7 +36,7 @@
                     <p> {{prenda.desc}} </p>
                 </div>
                 <div class="add_to_cart">
-                    <form action="{% url 'category' %}" method="POST">
+                    <form action="{% url 'clothe' prenda.id %}" method="POST">
                         {% csrf_token %}
                         <button class="btn_3" value="{{prenda.id}}" name='ropaCarro' type="submit">Añadir al carrito
                         </button>
