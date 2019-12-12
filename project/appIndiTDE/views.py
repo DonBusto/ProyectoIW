@@ -60,7 +60,7 @@ def favourites(request):
         c = list(get_carro_completo())
         a = list(get_all_clothes())
         context = {
-            'favoritos' : get_favourites_by_user(c, user),
+            'favoritos' : get_cantidades_ropa(c, user),
             'marcas': get_all_brands(a),
             'usuario': user
 

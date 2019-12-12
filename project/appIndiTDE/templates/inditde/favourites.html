@@ -3,96 +3,108 @@
 
 {% block content %}
 <div id="app-3">
-  <span v-if="seen">Ahora me ves</span>
-</div>
-
-<div id = "carritoVue">
-  <p>{{usuarioVue}}</p>
-  <p>p</p>
+  <p>Este es el carrito de <strong>[[usuarioVue]]</strong></p>
+  <h2 v-if = "favoritosVue.length === 0">No has añadido ropa a tu lista de favoritos</h2>
   <section class="cart_area section_padding">
-      <div class="container">
-          <div class="cart_inner">
-              <div class="table-responsive">
-                  <table class="table">
-                      <thead>
-                      <tr>
-                          <th scope="col">Producto {{favouritesCount}}/20</th>
-                          <th scope="col">Precio</th>
-                      </tr>
-                      </thead>
-
-                      <h2 v-if = "ropas.length === 0">No has añadido ropa a tu lista de favoritos</h2>
-                      <template v-else>
-                        <h2>xd</h2>
-                        <tbody>
-                        <tr v-for="r in ropas">
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="{{MEDIA_URL}}{{r.ropa.img.url}}" alt=""/>
-                                    </div>
-                                    <div class="media-body">
-                                        <p>{{r.ropa.nombre}}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>{{r.ropa.pfinal}}</h5>
-                            </td>
-                        </tr>
-
-                        <tr class="bottom_button">
-                            <td>
-                                <a class="btn_1" href="{% url 'favourites' %}">Actualizar favoritos</a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                      </template>
-                  </table>
-                  <div class="checkout_btn_inner float-right">
-                      <a class="btn_1" href="{% url 'category' %}">BUSCAR OTRA PRENDA</a>
-                      <a class="btn_1 checkout_btn_1" href="{% url 'cart' %}">IR AL CARRITO</a>
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class = "table">
+            <thead>
+              <tr>
+                <th scope="col">Producto [[favoritosCount]]/20</th>
+                <th scope="col">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(f, index) in favoritosVue">
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <h5>Aqui va la imagen de la ropa</h5>
+                    </div>
+                    <div class="media-body">
+                      <p>[[f.nombre]] x[[f.cantidad]]</p>
+                      <button class="btn_3" @click="borrarFavorito(index)">Borrar favorito</button>
+                    </div>
                   </div>
-              </div>
-          </div>
+                </td>
+                <td>
+                  <h5>[[favoritosPrecio(f)]]</h5>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <p>[[favoritosPrecioTotal]]</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
+
+
 <script type="text/javascript">
-  var carrito = new Vue({
-    el:"#carritoVue",
-    data:{
-      usuarioVue: "userVue",
-      ropas:[]
+  var app3 = new Vue({
+  delimiters:['[[', ']]'],
+  el: '#app-3',
+  data: {
+    message:"Prueba",
+    usuarioVue:'{{usuario}}',
+    favoritosPrecioTotalA: 0,
+    favoritosVue: [
+    {
+      nombre:'Ropa1',
+      cantidad: 3,
+      precio: 50
     },
-    methods:{
-      loadFavoritos: function(favoritos){
-        for f in favoritos:
-          this.ropas.push(f);
-      },
-
-      loadUsuario: function(usuario){
-        this.usuario = usuario;
-      },
-      removeFavorito: function(nombre){
-        this.ropas.remove(nombre);
-      },
+    {
+      nombre:'Ropa2',
+      cantidad: 1,
+      precio: 60
+    },
+    ]
+  },
+  methods: {
+    cargarFavoritos: function(event){
+        for (var f in this.favoritosVue){
+          this.favoritosVue.push(f);
+        }
 
     },
-    computed:{
-      favouritesCount(){
-        return this.ropas.length;
+    borrarFavorito: function(index){
+
+      if (this.favoritosVue[index].cantidad > 1) {
+
+          this.favoritosVue[index].cantidad = this.favoritosVue[index].cantidad - 1;
+
+      }else{
+        this.favoritosVue.splice(index, 1);
       }
 
     },
-
-  });
-  var app3 = new Vue({
-  el: '#app-3',
-  data: {
-    seen: false
+    favoritosPrecio: function(favorito){
+      precio = favorito.precio * favorito.cantidad;
+      return precio;
+    },
+  },
+  computed: {
+    favoritosCount(){
+      return this.favoritosVue.length;
+    },
+    favoritosPrecioTotal(){
+      this.favoritosPrecioTotalA = 0;
+      this.favoritosVue.forEach(favorito => this.favoritosPrecioTotalA += favorito.precio * favorito.cantidad);
+      return this.favoritosPrecioTotalA;
+    },
   }
 });
 
