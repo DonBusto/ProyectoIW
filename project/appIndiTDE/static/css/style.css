@@ -7847,6 +7847,12 @@ h6 {
   font-weight: 600;
   margin-bottom: 20px;
 }
+.contact-title2 {
+  margin-left: 275px;
+  font-size: 27px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
 
 /* line 47, /Applications/MAMP/htdocs/palash/cl/august 2019/202. Shop/202 shop html/sass/_contact.scss */
 .form-contact label {

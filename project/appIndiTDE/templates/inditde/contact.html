@@ -1,8 +1,29 @@
 {% extends "inditde/base.html" %}
 {% load static %}
+
+{% block head %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
+
 {% block content %}
 
 <section class="contact-section padding_top">
+
+  <h2 class="contact-title2">  Estamos aquí:</h2>      
+  <div id='map' width="100%" style='height:400px'></div>
+
+  <script>
+   mapboxgl.accessToken =  "pk.eyJ1IjoiZGFuZWwiLCJhIjoiY2s0M3p1cXF0MGNmdTNkb2lzNHpjaWd2OSJ9.SL4F2ogYC7raURgPJ9MbaQ"
+   var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v10',
+    center: [-2.9391846, 43.2589983],
+    zoom: 18
+   });
+  </script>
+
     <div class="container">
 
         <div class="row">
