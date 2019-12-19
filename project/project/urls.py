@@ -33,7 +33,7 @@ urlpatterns = [
     path('contact/', views.contact, name = 'contact'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
     path('brand/<str:brand_name>', views.brand, name ='brand'),
-    path('brand/<str:brand_name>/en', views.brand, name ='brand'),
+    path('brand/eng/<str:brand_name>', views.brand_eng, name ='brand_eng'),
     path('shop/', views.category, name ='category'),
     path('favourites/', views.favourites, name='favourites'),
 

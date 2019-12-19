@@ -241,6 +241,17 @@ def brand(request, brand_name):
         context['carro'] = get_clothes_by_user(c, user)
     return render(request, 'inditde/marca.html', context)
 
+def brand_eng(request, brand_name):
+    c = list(get_carro_completo())
+    brand = Marca.objects.get(nombre=brand_name)
+    ropa = get_by_brand(list(get_all_clothes()), brand)
+    context = {'my_ropa': ropa, 'marca': brand, 'marcas': get_all_brands(list(get_all_clothes()))}
+    if request.user.is_authenticated:
+        user = request.user
+        context['user'] = user
+        context['carro'] = get_clothes_by_user(c, user)
+    return render(request, 'inditde/marcaen.html', context)
+
 
 def order_by_disccount(ropas):
     return sorted(ropas, key=lambda x: (x.pvp - x.pfinal), reverse=True)
