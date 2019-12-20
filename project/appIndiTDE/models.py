@@ -9,6 +9,9 @@ class Carro(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     ropa = models.ForeignKey('Ropa', on_delete=models.CASCADE)
 
+class Favorito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    ropa = models.ForeignKey('Ropa', on_delete=models.CASCADE)
 
 class Marca(models.Model):
     id = models.CharField(max_length = 5, primary_key =True)
