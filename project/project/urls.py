@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.i18n import i18n_patterns
 import appIndiTDE.views as views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django_filters.views import FilterView
 from appIndiTDE.filters import RopaFilter
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +32,6 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('contact/', views.contact, name = 'contact'),
     path('clothe/<int:id_clothe>', views.clothe, name ='clothe'),
     path('brand/<str:brand_name>', views.brand, name ='brand'),
     path('brand/eng/<str:brand_name>', views.brand_eng, name ='brand_eng'),
@@ -38,5 +39,9 @@ urlpatterns = [
     path('favourites/', views.favourites, name='favourites'),
 
 ]
+urlpatterns += i18n_patterns(
+    path('contact/', views.contact, name = 'contact'),
+    prefix_default_language=False,
+)
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
