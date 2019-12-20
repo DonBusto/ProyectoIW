@@ -25,6 +25,7 @@
                     </div>
                     <div class="media-body">
                       <p>[[f.nombre]] x[[f.cantidad]]</p>
+                      <button class="btn_3" @click="anyadirFavorito(index)">Añadir favorito</button>
                       <button class="btn_3" @click="borrarFavorito(index)">Borrar favorito</button>
                     </div>
                   </div>
@@ -53,6 +54,7 @@
 
 
 <script type="text/javascript">
+
   var app3 = new Vue({
   delimiters:['[[', ']]'],
   el: '#app-3',
@@ -74,10 +76,8 @@
     ]
   },
   methods: {
-    cargarFavoritos: function(event){
-        for (var f in this.favoritosVue){
-          this.favoritosVue.push(f);
-        }
+    cargarFavoritos: function(favoritos){
+        favoritos.forEach(favorito => this.favoritosVue.push(favorito))
 
     },
     borrarFavorito: function(index){
@@ -91,10 +91,18 @@
       }
 
     },
+    anyadirFavorito: function(index){
+      this.favoritosVue[index].cantidad = this.favoritosVue[index].cantidad + 1;
+    },
     favoritosPrecio: function(favorito){
       precio = favorito.precio * favorito.cantidad;
       return precio;
     },
+  },
+  beforeMount () {
+    console.log("beforeMount")
+    this.cargarFavoritos()
+    this.usuarioVue="changedUser"
   },
   computed: {
     favoritosCount(){

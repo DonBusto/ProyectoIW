@@ -145,7 +145,11 @@
                                     <ul>
                                         <form action="{% url 'category' %}" method="POST">
                                             {% csrf_token %}
-                                            <li><button class="btn_5 ti-bag" value="{{r.id}}" name='ropaCarro' type="submit"></button></li>
+                                            <li><button class="btn_5 ti-bag" value="{{r.id}}-c" name='ropaCarro' type="submit"></button></li>
+                                        </form>
+                                        <form action="{% url 'category' %}" method="POST">
+                                            {% csrf_token %}
+                                            <li><button class="btn_5 ti-star" value="{{r.id}}-f" name='ropaCarro' type="submit"></button></li>
                                         </form>
                                     </ul>
                                 </div>
