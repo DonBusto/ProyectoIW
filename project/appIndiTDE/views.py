@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Usuario, Ropa, Marca, Sugerencia, Comentario, Carro
+from .models import Usuario, Ropa, Marca, Sugerencia, Comentario, Carro, Favorito
 from django.core.mail import send_mail
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -57,10 +57,10 @@ def cart(request):
 def favourites(request):
     if request.user.is_authenticated:
         user = request.user
-        c = list(get_carro_completo())
+        f = list(get_favoritos_completo())
         a = list(get_all_clothes())
         context = {
-            'favoritos' : get_cantidades_ropa(c, user),
+            'favoritos' : get_cantidades_ropa_favoritos(f, user),
             'marcas': get_all_brands(a),
             'usuario': user
 
@@ -255,6 +255,9 @@ def get_carro_completo():
     carro = Carro.objects.all()
     return carro
 
+def get_favoritos_completo():
+    fav = Favorito.objects.all()
+    return fav
 
 def get_all_comments():
     comments = Comentario.objects.all()
@@ -276,9 +279,15 @@ def category(request):
         context['carro'] = get_clothes_by_user(c, user)
     if request.method == 'POST':
         id = request.POST.get('ropaCarro')
-        item = Ropa.objects.get(id=id)
-        newItem = Carro.objects.create(usuario=request.user, ropa=item)
-        newItem.save()
+        ids = id.split("-")
+        if ids[1] == "c":
+            item = Ropa.objects.get(id=ids[0])
+            newItem = Carro.objects.create(usuario=request.user, ropa=item)
+            newItem.save()
+        if ids[1] == "f":
+            item = Ropa.objects.get(id=ids[0])
+            newItem = Favorito.objects.create(usuario=request.user, ropa=item)
+            newItem.save()
         return redirect('category')
 
     return render(request, 'inditde/category.html', context)
@@ -344,12 +353,31 @@ def get_cantidades_ropa(carro, user):
                 my_carro.append(i)
     return my_carro
 
-def get_favourites_by_user(carro, user):
-    my_carro = []
-    for i in carro:
+def get_favourites_by_user(favoritos, user):
+    my_favourites = []
+    for i in favoritos:
         if (i.usuario == user):
-            my_carro.append(i)
-    return my_carro
+            my_favourites.append(i)
+    return my_favourites
+
+def get_cantidades_ropa_favoritos(favoritos, user):
+    my_favourites = []
+    for i in favoritos:
+        if (i.usuario == user):
+            if(len(my_favourites) >= 1):
+                c = any(x.ropa.nombre == i.ropa.nombre for x in my_favourites)
+                if c:
+                    for x in my_favourites:
+                        if x.ropa.nombre == i.ropa.nombre:
+                            x.ropa.cantidad = x.ropa.cantidad + 1
+                else:
+                    i.ropa.cantidad = 1
+                    my_favourites.append(i)
+
+            else:
+                i.ropa.cantidad = 1
+                my_favourites.append(i)
+    return my_favourites
 
 def get_total(carro):
     suma = 0
