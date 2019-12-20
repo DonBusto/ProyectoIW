@@ -1,0 +1,72 @@
+<!doctype html>
+
+{% extends "inditde/base.html" %}
+{% load static %}
+    {% block content %}
+
+    <section class="brand_banner" style="background-image: url('{{MEDIA_URL}}{{marca.logo.url}}');">
+        <div class="container">
+          <a href = "/brand/eng/{{marca.nombre}}"><button class="btn_5">ENG</button></a>
+          <a href = "/brand/{{marca.nombre}}"><button class="btn_5">ESP</button></a>
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="banner_slider">
+                        <div class="single_banner_slider">
+                            <div class="banner_text">
+                                <div class="banner_text_iner">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!--================Blog Area =================-->
+
+   <section class="blog_area single-post-area section_padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="blog_details">
+                     <h1>{{marca.nombre}} </h1>
+                     <p>Description:</p>
+                     <p>{{marca.descEn}} </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--================Blog Area end =================-->
+
+
+<section class="new_arrival section_padding">
+   <h1>From this brand:</h1>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div id="article_men" class="new_arrival_iner filter-container">
+                  {% for r in my_ropa|slice:":6" %}
+                     {% if r.nombre != NULL  %}
+                        <div class="single_arrivel_item weidth_1 mix shoes">
+                              <img src="{{MEDIA_URL}}{{r.img.url}}" style="width:auto;height:auto;"  alt="#">
+                              <div class="hover_text">
+                                 <p>{{r.marca}} </p>
+                                 <a href="{% url 'clothe' r.id%}"><h3>{{r.nombre}}</h3></a>
+                                 <h4>After {{r.pvp}}€</h4>
+                                 <h5>Before {{r.pfinal}}€</h5>
+                                 <div class="social_icon"></div>
+                              </div>
+                        </div>
+                     {% endif %}
+                  {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}

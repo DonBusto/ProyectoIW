@@ -17,6 +17,7 @@ class Marca(models.Model):
     id = models.CharField(max_length = 5, primary_key =True)
     nombre = models.CharField(max_length = 20)
     desc = models.TextField()
+    descEn = models.TextField()
     logo = models.ImageField()
 
 
