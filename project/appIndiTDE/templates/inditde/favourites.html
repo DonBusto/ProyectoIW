@@ -3,7 +3,7 @@
 
 {% block content %}
 <div id="app-3">
-  <p>Este es el carrito de <strong>[[usuarioVue]]</strong></p>
+  <p>Esta es la lista de favoritos de <strong>[[usuarioVue]]</strong></p>
   <h2 v-if = "favoritosVue.length === 0">No has añadido ropa a tu lista de favoritos</h2>
   <section class="cart_area section_padding">
     <div class="container">
@@ -12,8 +12,8 @@
           <table class = "table">
             <thead>
               <tr>
-                <th scope="col">Producto [[favoritosCount]]/20</th>
-                <th scope="col">Precio</th>
+                <th scope="col">Dependiente [[favoritosCount]]/20</th>
+                <th scope="col">Valoración</th>
               </tr>
             </thead>
             <tbody>
@@ -21,7 +21,7 @@
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <h5>Aqui va la imagen de la ropa</h5>
+
                     </div>
                     <div class="media-body">
                       <p>[[f.nombre]] x[[f.cantidad]]</p>
@@ -64,12 +64,12 @@
     favoritosPrecioTotalA: 0,
     favoritosVue: [
     {
-      nombre:'Ropa1',
+      nombre:'Paco',
       cantidad: 3,
       precio: 50
     },
     {
-      nombre:'Ropa2',
+      nombre:'Lucia',
       cantidad: 1,
       precio: 60
     },
