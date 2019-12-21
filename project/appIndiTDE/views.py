@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Usuario, Ropa, Marca, Sugerencia, Comentario, Carro, Favorito
+from .models import Usuario, Ropa, Marca, Sugerencia, Comentario, Carro, Favorito, Review
 from django.core.mail import send_mail
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -156,31 +156,37 @@ def login(request):
 
 
 def clothe(request, id_clothe):
+    if request.user.is_authenticated:
+        user = request.user
+    if request.method == 'POST':
+        id = request.POST.get('ropaCarro')
+        ids = id.split("-")
+        if ids[1] == "c":
+            item = Ropa.objects.get(id=ids[0])
+            newItem = Carro.objects.create(usuario=request.user, ropa=item)
+            newItem.save()
+        if ids[1] == "s":
+            item = Ropa.objects.get(id=ids[0])
+            valo = request.POST.get('message')
+            rating = request.POST.get('rating')
+            newComment = Review.objects.create(usuario=request.user, ropa=item, texto=valo, valoracion=rating)
+            newComment.save()
+
     a = list(get_all_clothes())
     c = list(get_carro_completo())
-    listaC = list(get_comments_by_clothe(get_all_comments(), Ropa.objects.get(id=id_clothe)))
+    listaR = list(get_reviews_by_clothe(get_all_reviews(), Ropa.objects.get(id=id_clothe)))
     context = {
         'id': int(id_clothe),
         'listaRopa': list(get_all_clothes()),
         'prenda': Ropa.objects.get(id=id_clothe),
-        'comentarios': listaC,
-        'avg': get_average(listaC),
-        'recuentoVals': get_ratings_count(listaC),
+        'reviews': listaR,
+        'avg': get_average(listaR),
+        'recuentoVals': get_ratings_count(listaR),
         'marcas': get_all_brands(a),
         'id': id_clothe
     }
-    if request.user.is_authenticated:
-        user = request.user
-        context['user'] = user
-        context['carro'] = get_clothes_by_user(c, user)
-    if request.method == 'POST':
-        id = request.POST.get('ropaCarro')
-        item = Ropa.objects.get(id=id)
-        newItem = Carro.objects.create(usuario=request.user, ropa=item)
-        newItem.save()
-        return render(request, 'inditde/prenda.html', context)
-    else:
-        return render(request, 'inditde/prenda.html', context)
+
+    return render(request, 'inditde/prenda.html', context)
 
 
 
@@ -270,9 +276,9 @@ def get_favoritos_completo():
     fav = Favorito.objects.all()
     return fav
 
-def get_all_comments():
-    comments = Comentario.objects.all()
-    return comments
+def get_all_reviews():
+    reviews = Review.objects.all()
+    return reviews
 
 
 def get_sugerencias():
@@ -418,12 +424,12 @@ def get_ratings_count(comments):
     return vals
 
 
-def get_comments_by_clothe(comentarios, ropa):
-    comments = []
-    for i in comentarios:
+def get_reviews_by_clothe(reviews, ropa):
+    revieews = []
+    for i in reviews:
         if (i.ropa.id == ropa.id):
-            comments.append(i)
-    return comments
+            revieews.append(i)
+    return revieews
 
 
 def get_average(comentarios):
