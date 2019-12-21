@@ -71,3 +71,12 @@ class Comentario(models.Model):
 
     def __str__(self):
         return self.texto
+
+class Review(models.Model):
+    usuario = models.ForeignKey(User, on_delete = models.CASCADE)
+    ropa = models.ForeignKey('Ropa', on_delete = models.CASCADE)
+    texto = models.CharField(max_length = 240)
+    valoracion = models.IntegerField()
+
+    def __str__(self):
+        return self.texto
