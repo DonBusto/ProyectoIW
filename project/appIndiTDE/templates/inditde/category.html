@@ -142,16 +142,16 @@
                             <div class="single_category_img">
                                 <img src="{{MEDIA_URL}}{{r.img.url}}" alt="">
                                 <div class="category_social_icon">
-                                    <ul>
+                                    <div>
                                         <form action="{% url 'category' %}" method="POST">
                                             {% csrf_token %}
-                                            <li><button class="btn_5 ti-bag" value="{{r.id}}-c" name='ropaCarro' type="submit"></button></li>
+                                            <div><button class="btn_5 ti-bag" value="{{r.id}}-c" name='ropaCarro' type="submit"></button></div>
                                         </form>
                                         <form action="{% url 'category' %}" method="POST">
                                             {% csrf_token %}
-                                            <li><button class="btn_5 ti-star" value="{{r.id}}-f" name='ropaCarro' type="submit"></button></li>
+                                            <div><button class="btn_5 ti-star" value="{{r.id}}-f" name='ropaCarro' type="submit"></button></div>
                                         </form>
-                                    </ul>
+                                    </div>
                                 </div>
                                 <div class="category_product_text">
                                     <a href="{% url 'clothe' r.id%}"><h5>{{r.nombre}}</h5></a>

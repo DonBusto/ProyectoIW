@@ -104,13 +104,13 @@
                         <p></p>
                         {% endif %}
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="#}" id="navbarDropdown3" role="button"
+                            <a class="dropdown-toggle" href="" id="navbarDropdown3" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <a class="ti-bag"></a>
                             </a>
 
                             {% if user.is_authenticated %}
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-label="navbarDropdown">
                                 <div class="single_product">
                                     <a class="dropdown-item" href="{% url 'cart' %}"><strong>Ver carrito</strong></a>
                                     <a class="dropdown-item" href="{%url 'favourites' %}"><strong>Ver favoritos</strong></a>

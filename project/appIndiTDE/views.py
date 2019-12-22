@@ -315,6 +315,7 @@ def category(request):
             item = Ropa.objects.get(id=ids[0])
             newItem = Favorito.objects.create(usuario=request.user, ropa=item)
             newItem.save()
+            print("Fav guardado")
         return redirect('category')
 
     return render(request, 'inditde/category.html', context)
