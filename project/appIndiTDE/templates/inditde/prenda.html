@@ -87,12 +87,12 @@
                                     <div class="box_total">
                                         <h5>Valoración media:</h5>
                                         <h4>{{ avg }}</h4>
-                                        <h6>({{ comentarios|length }} Opiniones)</h6>
+                                        <h6>({{ reviews|length }} Opiniones)</h6>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="rating_list">
-                                        <h3>Basado en {{ comentarios|length }} opiniones</h3>
+                                        <h3>Basado en {{ reviews|length }} opiniones</h3>
                                         <ul class="list">
                                             <li>
                                                 <a href="#">5 Estrellas
@@ -151,7 +151,7 @@
                                             {%endwith%}
                                         </div>
                                     </div>
-                                    <p> 
+                                    <p>
                                         {{co.texto}}
                                     </p>
                                 </div>
