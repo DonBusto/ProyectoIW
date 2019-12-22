@@ -6,8 +6,8 @@
 
     <section class="brand_banner" style="background-image: url('{{MEDIA_URL}}{{marca.logo.url}}');">
         <div class="container">
-          <a href = "/brand/eng/{{marca.nombre}}"><button class="btn_5">ENG</button></a>
-          <a href = "/brand/{{marca.nombre}}"><button class="btn_5">ESP</button></a>
+          <button class="btn_5" onclick="window.location.href = '/brand/eng/{{marca.nombre}}'">Eng</button>
+          <button class="btn_5" onclick="window.location.href = '/brand/{{marca.nombre}}'">Cas</button>
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <div class="banner_slider">
