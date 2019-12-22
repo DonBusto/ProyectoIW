@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appIndiTDE',
     'django_filters',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

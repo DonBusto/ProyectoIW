@@ -12,8 +12,8 @@
           <table class = "table">
             <thead>
               <tr>
-                <th scope="col">Dependiente [[favoritosCount]]/20</th>
-                <th scope="col">Valoración</th>
+                <th scope="col">Prenda [[favoritosCount]]/20</th>
+                <th scope="col">Precio</th>
               </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
 
                     </div>
                     <div class="media-body">
-                      <p>[[f.nombre]] x[[f.cantidad]]</p>
+                      <p>[[f.ropa.nombre]] x[[f.ropa.cantidad]]</p>
                       <button class="btn_3" @click="anyadirFavorito(index)">Añadir favorito</button>
                       <button class="btn_3" @click="borrarFavorito(index)">Borrar favorito</button>
                     </div>
@@ -62,55 +62,63 @@
     message:"Prueba",
     usuarioVue:'{{usuario}}',
     favoritosPrecioTotalA: 0,
-    favoritosVue: [
-    {
-      nombre:'Paco',
-      cantidad: 3,
-      precio: 50
-    },
-    {
-      nombre:'Lucia',
-      cantidad: 1,
-      precio: 60
-    },
-    ]
+    favoritosVue: []
+  },
+  mounted: function(){
+    this.cargarFavoritos();
   },
   methods: {
     cargarFavoritos: function(favoritos){
-        favoritos.forEach(favorito => this.favoritosVue.push(favorito))
+      axios.get('http://127.0.0.1:8000/api/favoritos/').then((response) => {
+        response.data.forEach(favorito =>{
+          if (this.usuarioVue==favorito.usuario.first_name){
+            this.favoritosVue.push(favorito);
+          }
 
+
+        });
+
+
+      })
     },
     borrarFavorito: function(index){
 
-      if (this.favoritosVue[index].cantidad > 1) {
+      if (this.favoritosVue[index].ropa.cantidad > 1) {
 
-          this.favoritosVue[index].cantidad = this.favoritosVue[index].cantidad - 1;
-
+          this.favoritosVue[index].ropa.cantidad = this.favoritosVue[index].ropa.cantidad - 1;
+          //No permite acceder a los atributos de un model con un axios.patch(). En nuestro ejemplo no deja acceder a ropa.cantidad para cambiar eso.
       }else{
+        id = this.favoritosVue[index].id;
         this.favoritosVue.splice(index, 1);
+        axios({
+          url: 'http://127.0.0.1:8000/api/favoritos/' +id+ '/',
+          method: 'delete',
+          xsrfHeaderName: "X-CSRFToken",
+
+        })
+
       }
 
     },
     anyadirFavorito: function(index){
-      this.favoritosVue[index].cantidad = this.favoritosVue[index].cantidad + 1;
+      this.favoritosVue[index].ropa.cantidad = this.favoritosVue[index].ropa.cantidad + 1;
+      id = this.favoritosVue[index].id;
+      cant = this.favoritosVue[index].ropa.cantidad;
+      //Igual que arriba.
     },
     favoritosPrecio: function(favorito){
-      precio = favorito.precio * favorito.cantidad;
+      precio = favorito.ropa.pfinal * favorito.ropa.cantidad;
       return precio;
     },
   },
-  beforeMount () {
-    console.log("beforeMount")
-    this.cargarFavoritos()
-    this.usuarioVue="changedUser"
-  },
+
   computed: {
     favoritosCount(){
       return this.favoritosVue.length;
     },
     favoritosPrecioTotal(){
       this.favoritosPrecioTotalA = 0;
-      this.favoritosVue.forEach(favorito => this.favoritosPrecioTotalA += favorito.precio * favorito.cantidad);
+      this.favoritosVue.forEach(favorito => this.favoritosPrecioTotalA += favorito.ropa.pfinal * favorito.ropa.cantidad);
       return this.favoritosPrecioTotalA;
     },
   }

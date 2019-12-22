@@ -16,13 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls import url, include
 import appIndiTDE.views as views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django_filters.views import FilterView
 from appIndiTDE.filters import RopaFilter
+from appIndiTDE.views import RopaViewSet, FavoritosViewSet
+from rest_framework import routers
 
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register('ropas', RopaViewSet)
+router.register('favoritos', FavoritosViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,6 +45,7 @@ urlpatterns = [
     path('brand/eng/<str:brand_name>', views.brand_eng, name ='brand_eng'),
     path('shop/', views.category, name ='category'),
     path('favourites/', views.favourites, name='favourites'),
+    url('api/', include(router.urls))
 
 ]
 urlpatterns += i18n_patterns(

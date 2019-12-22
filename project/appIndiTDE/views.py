@@ -6,10 +6,20 @@ from django.contrib import messages
 from django.conf import settings
 from .filters import RopaFilter
 from .forms import fSugerencia
+from appIndiTDE.serializers import RopaSerializer, FavoritoSerializer
+from rest_framework import viewsets
 import logging
 
 
 # Create your views here.
+
+class RopaViewSet(viewsets.ModelViewSet):
+    queryset = Ropa.objects.all()
+    serializer_class = RopaSerializer
+
+class FavoritosViewSet(viewsets.ModelViewSet):
+    queryset = Favorito.objects.all()
+    serializer_class = FavoritoSerializer
 
 def index(request):
     a = list(get_all_clothes())
